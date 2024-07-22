@@ -1,0 +1,84 @@
+<div class="container mx-auto p-6 bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-lg bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Login Form</h2>
+    
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 text-sm font-medium mb-1">Name</label>
+        <input id="name" formControlName="name" type="text" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)" class="text-red-600 text-sm mt-1">
+          Name is required.
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="phoneNumber" class="block text-gray-700 text-sm font-medium mb-1">Phone Number</label>
+        <input id="phoneNumber" formControlName="phoneNumber" type="text" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="contactForm.get('phoneNumber')?.invalid && (contactForm.get('phoneNumber')?.dirty || contactForm.get('phoneNumber')?.touched)" class="text-red-600 text-sm mt-1">
+          Enter a valid phone number (11 digits).
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-1">Email</label>
+        <input id="email" formControlName="email" type="email" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)" class="text-red-600 text-sm mt-1">
+          Enter a valid email address.
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="newAddress" class="block text-gray-700 text-sm font-medium mb-1">Addresses</label>
+        <div class="flex">
+          <input
+            formControlName="newAddress"
+            type="text"
+            class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+            placeholder="Enter an address"
+          />
+          <button
+          *ngIf="this.addresses.length < 5"
+            type="button"
+            (click)="addAddress()"
+            class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Add
+          </button>
+        </div>
+        <div class="mt-2">
+          <div *ngFor="let address of addresses; let i = index" class="flex items-center justify-between mt-1">
+            <span>{{ address }}</span>
+            <button
+              type="button"
+              (click)="removeAddress(i)"
+              class="text-red-600 hover:text-red-800"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="longitude" class="block text-gray-700 text-sm font-medium mb-1">Longitude</label>
+        <input id="longitude" [disabled]="true" formControlName="longitude" type="text" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="contactForm.get('longitude')?.invalid && (contactForm.get('longitude')?.dirty || contactForm.get('longitude')?.touched)" class="text-red-600 text-sm mt-1">
+          Enter a valid longitude.
+        </div>
+      </div>
+    
+      <div class="mb-4">
+        <label for="latitude" class="block text-gray-700 text-sm font-medium mb-1">Latitude</label>
+        <input id="latitude" [disabled]="true" formControlName="latitude" type="text" class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="contactForm.get('latitude')?.invalid && (contactForm.get('latitude')?.dirty || contactForm.get('latitude')?.touched)" class="text-red-600 text-sm mt-1">
+          Enter a valid latitude.
+        </div>
+      </div>
+    
+      <button type="submit" [disabled]="contactForm.invalid" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Submit
+      </button>
+    </form>
+    
+  </div>
+</div>
