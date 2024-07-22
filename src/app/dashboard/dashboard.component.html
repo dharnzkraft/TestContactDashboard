@@ -23,5 +23,12 @@
         </tbody>
       </table>
     </div>
-  </div>
+</div>
+
+<div *ngIf="!storedData.length" class="flex" >
+    <div class="m-auto items-center h-screen mt-10">
+        <div class="h3 text-center" >It is a ghost town here! Proceed to add your contacts.</div>
+        <p class="text-center" ><a routerLink="/add-contact" class="text-center" >Add Contact</a></p>
+    </div>
+</div>
   
