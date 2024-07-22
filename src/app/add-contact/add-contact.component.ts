@@ -14,6 +14,7 @@ export class AddContactComponent implements OnInit{
   longitude!: number;
   latitude!: number;
   contactInformations: any;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -22,20 +23,7 @@ export class AddContactComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.geolocationService.getCurrentPosition()
-      .then(coords => {
-        this.contactForm.patchValue({
-          longitude: coords.longitude,
-          latitude: coords.latitude
-        });
-        this.longitude = coords.longitude,
-        this.latitude = coords.latitude
-        
-        
-      })
-      .catch(err => {
-        // this.error = err.message;
-      });
+   this.getGeo()
 
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
@@ -45,6 +33,23 @@ export class AddContactComponent implements OnInit{
       longitude: [{ value: '', disabled: true }, [Validators.required]],
       latitude: [{ value: '', disabled: true }, [Validators.required]],
 
+    });
+  }
+
+  getGeo(){
+    this.geolocationService.getCurrentPosition()
+    .then(coords => {
+      this.contactForm.patchValue({
+        longitude: coords.longitude,
+        latitude: coords.latitude
+      });
+      this.longitude = coords.longitude,
+      this.latitude = coords.latitude
+      
+      
+    })
+    .catch(err => {
+      // this.error = err.message;
     });
   }
 
@@ -62,14 +67,21 @@ export class AddContactComponent implements OnInit{
   }
  
   onSubmit(): void {
-    if (this.contactForm.valid) {
-      
-      const formData = { ...this.contactForm.value, addresses: this.addresses, longitude: this.longitude, latitude: this.latitude };
-      console.log('Form Values:', formData);
-      this.storeInLocalStorage(formData)
-    } else {
-      console.error('Form is invalid');
-    }
+    this.isLoading = true;
+    setTimeout(()=>{
+      if (this.contactForm.valid) {
+        const formData = { ...this.contactForm.value, addresses: this.addresses, longitude: this.longitude, latitude: this.latitude };
+        console.log('Form Values:', formData);
+        this.storeInLocalStorage(formData)
+        this.contactForm.reset()
+        this.getGeo()
+        this.addresses = [];
+      } else {
+        console.error('Form is invalid');
+      }
+      this.isLoading = false;
+    }, 3000)
+   
   }
 
   storeInLocalStorage(data: any): void {
