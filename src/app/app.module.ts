@@ -7,21 +7,29 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthPageComponent } from './auth-page/auth-page.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AddContactComponent,
-    DashboardComponent,
-    SidebarComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
