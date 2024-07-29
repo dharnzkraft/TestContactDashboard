@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-page',
@@ -12,10 +13,12 @@ export class AuthPageComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
   isLogin: boolean = true;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -26,6 +29,7 @@ export class AuthPageComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required] ],
       confirmPassword: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
@@ -36,17 +40,42 @@ export class AuthPageComponent {
   }
 
   onSubmitLogin() {
+    this.isLoading = true;
     if (this.loginForm.valid) {
       console.log('Login:', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe((response: any)=>{
+        this.isLoading = false;
+        if(response.success){
+          setTimeout(async () => {
+            // localStorage.setItem('userData', JSON.stringify(response?.data?.user_data));
+            await localStorage.setItem('auth_token', response?.data?.token);
+           
+          }, 500);
+          this.router.navigateByUrl('/dashboard/dashboard')
+        }
         console.log(response)
+      },(error)=>{
+        this.isLoading = false;
       })
     }
   }
 
   onSubmitRegister() {
+    this.isLoading = true;
+    console.log(this.registerForm.value)
     if (this.registerForm.valid) {
+      this.isLoading = false;
       console.log('Register:', this.registerForm.value);
+      this.authService.register(this.registerForm.value).subscribe((res: any)=>{
+        console.log(res)
+        if(res.success){
+          alert('Registration completed. Proceed to login')
+          this.isLogin = !this.isLogin
+
+        }
+      },(error)=>{
+        this.isLoading = false;
+      })
     }
   }
 

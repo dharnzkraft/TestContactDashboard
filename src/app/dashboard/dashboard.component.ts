@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   storedData: any[] = [];
+  productList: any;
 
-  constructor(){
+  constructor(
+    private productService: ProductService
+  ){
     this.fetchFromLocalStorage()
+    this.getProducts()
   }
 
   fetchFromLocalStorage(): void {
@@ -18,5 +23,14 @@ export class DashboardComponent {
     this.storedData = currentData ? JSON.parse(currentData) : [];
     // console.log('Fetched Data:', this.storedData);
   }
+
+  getProducts(){
+    this.productService.getAllProducts().subscribe((response: any)=>{
+      console.log(response)
+      this.productList = response.data
+    })
+  }
+
+
 
 }

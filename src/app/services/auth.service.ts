@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root'
 })
 export class AuthService {
-  private tokenKey = 'authToken';
+  private tokenKey = 'auth_token';
   baseUrl = environment.baseUrl;
   constructor(
     private http: HttpClient,
@@ -14,6 +14,10 @@ export class AuthService {
 
   login(payload: any){
     return this.http.post(this.baseUrl+`/auth/signin`, payload);
+  }
+
+  register(payload: any){
+    return this.http.post(this.baseUrl+`/auth/signup`, payload);
   }
 
   getToken(): string | null {

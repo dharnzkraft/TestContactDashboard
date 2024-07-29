@@ -11,10 +11,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ProductComponent } from './product/product.component';
+import { ProductModalComponent } from './common/product-modal/product-modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductComponent,
+    ProductModalComponent
   ],
   imports: [
     BrowserModule,
