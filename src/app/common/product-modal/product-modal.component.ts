@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -6,11 +6,12 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product-modal.component.html',
   styleUrls: ['./product-modal.component.scss']
 })
-export class ProductModalComponent {
+export class ProductModalComponent implements OnChanges {
 
   @Input() isOpen = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
   @Input() productId: string = '';
+  productDetails: any;
 
   constructor(
     private productService: ProductService
@@ -26,10 +27,12 @@ export class ProductModalComponent {
   getDetails(){
     this.productService.getAProduct(this.productId).subscribe((response: any) => {
       console.log(response)
+      this.productDetails = response.data
     })
   }
 
-  ngOnInit(){
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.productId)
     if(this.productId){
       this.getDetails()
     }

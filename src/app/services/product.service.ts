@@ -25,4 +25,12 @@ export class ProductService {
   calculate(payload: any){
     return this.http.post(this.baseUrl+`/product/calculate-duration`, payload);
   }
+
+  public convertImage(payload: any){
+    return this.http.post(this.baseUrl+`/product/upload-file`, payload)
+  }
+
+  public createProduct(payload: any){
+    return this.http.post(this.baseUrl+`/product`, payload)
+  }
 }

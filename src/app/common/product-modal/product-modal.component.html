@@ -1,10 +1,14 @@
 <div *ngIf="isOpen" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
     <div class="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-lg">
       <div class="px-6 py-4">
-        <div class="text-xl font-semibold mb-4">Modal Title</div>
+        <div class="text-xl font-semibold mb-4">Location: {{productDetails?.location?.address}} </div>
         <div class="mb-4">
           <!-- Modal content goes here -->
-          <p>This is the modal content</p>
+          <img [src]="productDetails?.veiw[0]" alt="" srcset="">
+          <div>
+            <small>Description: {{productDetails?.location?.description}} </small>
+          </div>
+          <p>Total Price: {{productDetails?.totalPrice}} </p>
         </div>
         <div class="flex justify-end">
           <button (click)="close()" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
