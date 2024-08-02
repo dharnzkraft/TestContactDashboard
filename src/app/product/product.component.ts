@@ -28,10 +28,11 @@ export class ProductComponent {
       description: ['', [Validators.required]],
       location_description: ['', [Validators.required]],
       totalPrice: ['', [Validators.required]],
+      category: ['', [Validators.required]],
       dailyPlan: [''],
       weeklyPlan: [''],
       monthlyPlan: [''],
-      isZeroPay: [],
+      // isZeroPay: [],
       view: [[], [Validators.required]],
   });
   }

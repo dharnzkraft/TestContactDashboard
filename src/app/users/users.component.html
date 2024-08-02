@@ -1,0 +1,58 @@
+<table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-800 text-white">
+      <tr>
+        <th
+          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+        >
+           Names
+        </th>
+        <th
+          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+        >
+          Phone Number 
+        </th>
+        <th
+          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+        >
+          Email
+        </th>
+        <th
+          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+        >
+          Wallet Balance
+        </th>
+        <th
+        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+      >
+        Account Number
+      </th>
+        <th
+          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+        >
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr *ngFor="let user of userList">
+        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+          {{ user?.fullName }}
+        </td>
+        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+          {{ user?.phoneNumber }}
+        </td>
+        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+          {{ user?.email }}
+        </td>
+        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+            ₦{{ user?.profile?.walletBalance }}
+          </td>
+          <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+            {{ user?.profile?.accountNumber }}
+          </td>
+        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+            <button class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs " >VIEW</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

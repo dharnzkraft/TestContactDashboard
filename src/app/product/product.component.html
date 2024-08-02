@@ -2,79 +2,155 @@
   <ng-container [ngSwitch]="productState">
     <div *ngSwitchCase="'viewProduct'">
       <div class="flex justify-end my-3">
-        <button (click)="productState = 'addProduct' " class="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        <button
+          (click)="productState = 'addProduct'"
+          class="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
           Add New Product
         </button>
       </div>
-  
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"  >
-        <div class="p-4 shadow text-white rounded" *ngFor="let prod of productList" >
-          <img [src]="prod.veiw[0]" [alt]="prod?.location?.address" srcset="">
-          <div class="grid grid-cols-1 grid-cols-2 gap-4" >
-              <button (click)="openModal(prod.id)" class=" mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div
+          class="p-4 shadow text-white rounded"
+          *ngFor="let prod of productList"
+        >
+          <img [src]="prod.veiw[0]" [alt]="prod?.location?.address" srcset="" />
+          <div class="grid grid-cols-1 grid-cols-2 gap-4">
+            <button
+              (click)="openModal(prod.id)"
+              class="mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
               View
-              </button>
-              <button class="mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            </button>
+            <button
+              class="mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
               Delete
-              </button>
+            </button>
           </div>
         </div>
       </div>
     </div>
     <div *ngSwitchCase="'addProduct'">
-      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" >
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="row">
-            <div class="col-6">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700" >Product Name/Location</label>
-                    <input formControlName="address" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700" >Description</label>
-                    <input formControlName="description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Location Description</label>
-                    <input formControlName="location_description" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700" >Product Price</label>
-                    <input formControlName="totalPrice" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="mb-4" >
-                    <label class="block text-sm font-medium text-gray-700" >Is ZeroPay Product ?</label>
-                    <select formControlName="isZeroPay" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                        <option value="true">True</option>
-                        <option value="false">False</option>
-                    </select>
-                  </div>
+          <div class="col-6">
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700"
+                >Product Name/Location</label
+              >
+              <input
+                formControlName="address"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700"
+                >Description</label
+              >
+              <input
+                formControlName="description"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700"
+                >Location Description</label
+              >
+              <input
+                formControlName="location_description"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700"
+                >Product Price</label
+              >
+              <input
+                formControlName="totalPrice"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700"
+                > Product Category ?</label
+              >
+              <select
+                formControlName="category"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value="ZeroPay">ZeroPay</option>
+                <option value="Shortlet">Shortlet-Apartment</option>
+                <option value="Car-rental">Car Rental</option>
+                <option value="Land Sale">Land Sale</option>
+
+              </select>
             </div>
             
-                <div class="mb-4" *ngIf="productForm.get('isZeroPay')?.value === 'true'">
-                    <label class="block text-sm font-medium text-gray-700" >Daily Price</label>
-                    <input formControlName="dailyPlan" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="mb-4" *ngIf="productForm.get('isZeroPay')?.value === 'true'" >
-                    <label class="block text-sm font-medium text-gray-700" >Weekly Price</label>
-                    <input formControlName="weeklyPlan" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="mb-4" *ngIf="productForm.get('isZeroPay')?.value === 'true'" >
-                    <label class="block text-sm font-medium text-gray-700" >Monthly Price</label>
-                    <input formControlName="monthlyPlan" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="col-md-4 mb-4">
-                    <label class="block text-sm font-medium text-gray-700" >Location Image</label>
-                    <input class="file-uploader"  type="file" [multiple]="false"  (change)="onFileSelected($event, 'image')" />
-                </div>
-           
+          </div>
+
+          <div
+            class="mb-4"
+            *ngIf="productForm.get('category')?.value === 'ZeroPay'"
+          >
+            <label class="block text-sm font-medium text-gray-700"
+              >Daily Price</label
+            >
+            <input
+              formControlName="dailyPlan"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div
+            class="mb-4"
+            *ngIf="productForm.get('category')?.value === 'ZeroPay'"
+          >
+            <label class="block text-sm font-medium text-gray-700"
+              >Weekly Price</label
+            >
+            <input
+              formControlName="weeklyPlan"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div
+            class="mb-4"
+            *ngIf="productForm.get('category')?.value === 'ZeroPay'"
+          >
+            <label class="block text-sm font-medium text-gray-700"
+              >Monthly Price</label
+            >
+            <input
+              formControlName="monthlyPlan"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div class="col-md-4 mb-4">
+            <label class="block text-sm font-medium text-gray-700"
+              >Location Image</label
+            >
+            <input
+              class="file-uploader"
+              type="file"
+              [multiple]="false"
+              (change)="onFileSelected($event, 'image')"
+            />
+          </div>
         </div>
-            
-            
-            <button  class="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"  [disabled]="isEnabled" >Add Product</button>
-       </form>
+
+        <button
+          class="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          [disabled]="isEnabled"
+        >
+          Add Product
+        </button>
+      </form>
     </div>
   </ng-container>
-    
 
-    <app-product-modal [(isOpen)]="isModalOpen" [productId]="selectedProductId" ></app-product-modal>
-  </div>
+  <app-product-modal
+    [(isOpen)]="isModalOpen"
+    [productId]="selectedProductId"
+  ></app-product-modal>
+</div>
