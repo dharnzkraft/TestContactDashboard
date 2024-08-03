@@ -1,3 +1,8 @@
 .sidebar {
     @apply transition-transform duration-300 ease-in-out;
   }
+
+  .active{
+    background-color: #F4B173;
+    ;
+  }

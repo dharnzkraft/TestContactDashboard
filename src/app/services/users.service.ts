@@ -15,8 +15,10 @@ export class UsersService {
 
   public getUsers(){
     return this.http.get(this.baseUrl+`/user/all`)
-
   }
 
+  public getUserFullDetails(userId: any){
+    return this.http.get(this.baseUrl+`/user/full-details/${userId}`)
+  }
   
 }

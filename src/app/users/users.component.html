@@ -1,58 +1,228 @@
-<table class="min-w-full divide-y divide-gray-200">
-    <thead class="bg-gray-800 text-white">
-      <tr>
-        <th
-          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
-        >
-           Names
-        </th>
-        <th
-          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
-        >
-          Phone Number 
-        </th>
-        <th
-          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
-        >
-          Email
-        </th>
-        <th
-          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
-        >
-          Wallet Balance
-        </th>
-        <th
-        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
-      >
-        Account Number
-      </th>
-        <th
-          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
-        >
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody class="bg-white divide-y divide-gray-200">
-      <tr *ngFor="let user of userList">
-        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-          {{ user?.fullName }}
-        </td>
-        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-          {{ user?.phoneNumber }}
-        </td>
-        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-          {{ user?.email }}
-        </td>
-        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-            ₦{{ user?.profile?.walletBalance }}
-          </td>
-          <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-            {{ user?.profile?.accountNumber }}
-          </td>
-        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-            <button class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs " >VIEW</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="p-5" >
+    <ng-container [ngSwitch]="userState">
+        <div *ngSwitchCase="'viewUsers'">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-800 text-white">
+                  <tr>
+                    <th
+                      class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                    >
+                       Names
+                    </th>
+                    <th
+                      class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                    >
+                      Phone Number 
+                    </th>
+                    <th
+                      class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                    >
+                      Email
+                    </th>
+                    <th
+                      class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                    >
+                      Wallet Balance
+                    </th>
+                    <th
+                    class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                  >
+                    Account Number
+                  </th>
+                    <th
+                      class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                    >
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr *ngFor="let user of userList">
+                    <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                      {{ user?.fullName }}
+                    </td>
+                    <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                      {{ user?.phoneNumber }}
+                    </td>
+                    <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                      {{ user?.email }}
+                    </td>
+                    <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ user?.profile?.walletBalance | currencyFormat }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ user?.profile?.accountNumber }}
+                      </td>
+                    <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        <button class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs" (click)="showUser(user.id)" >VIEW</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="'viewUserDetails'">
+            <div class="text-end">
+                <button class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs" (click)="userState = 'viewUsers' " >
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                          </svg> &nbsp;
+                        Back
+                    </div>
+                </button>
+            </div>
+            <div class="bg-white p-5 rounded-md mt-3">
+                <div class="my-5 flex w-full">
+                    <div class="text-xl underline basis-1/3">
+                        {{viewedUser.fullName}}
+                    </div>
+                    <div class="text-md basis-1/3">
+                        Referral Balance: {{viewedUser.referalBalance | currencyFormat}}
+                    </div>
+                    <div class="text-md basis-1/3">
+                        Wallet Balance: {{viewedUser?.profile?.walletBalance | currencyFormat}}
+                    </div>
+                </div>
+                <div class="my-3" >
+                    Email: <span class="text-orange-300" >{{viewedUser.email}}</span>
+                </div>
+                <div class="my-3" >
+                    Account Number: <span class="text-orange-300" >{{viewedUser?.profile?.accountNumber}}</span>
+                </div>
+                <div class="my-3" >
+                    Phone Number: <span class="text-orange-300"  >{{viewedUser.phoneNumber}}</span>
+                </div>
+                <div class="my-3" >
+                    City : <span class="text-orange-300" >{{viewedUser?.profile?.city}}</span>
+                </div>
+                <div class="my-3" >
+                    Address : <span class="text-orange-300" >{{viewedUser?.profile?.address}}</span>
+                </div>
+                <div class="my-3" >
+                    State: <span class="text-orange-300"  >{{viewedUser?.profile?.state}}</span>
+                </div>
+                
+            </div>
+            <div class="p-5 bg-white mt-3 rounded-md">
+                <div class="text-xl mt-5">
+                    User's Transaction 
+                </div>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                      <tr>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                           Description
+                        </th>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                          Amount
+                        </th>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                          Type
+                        </th>
+                        
+                        
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                      <tr *ngFor="let tran of userFullDetails.transactions">
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                          {{ tran?.description }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                            <span *ngIf="tran.type == 'DR' " class="text-red-400" >{{ tran?.amount | currencyFormat }}</span>
+                            <span *ngIf="tran.type == 'CR' " class="text-green-400" >{{ tran?.amount | currencyFormat }}</span>
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                            {{ tran?.status }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                          <span *ngIf="tran.type === 'DR' "  >Debit</span>
+                          <span *ngIf="tran.type === 'CR' "  >Credit</span>
+                        </td>
+                        
+                          
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-white mt-3 p-5 rounded-md">
+                <div class="text-xl mt-5">
+                    User's Subscriptions 
+                </div>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                      <tr>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                           Location
+                        </th>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                          Total Amount
+                        </th>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                          Outstanding Payment
+                        </th>
+                        <th
+                          class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                        >
+                          Sub. Frequency
+                        </th>
+                        <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Successful Auto-debits
+                      </th>
+                        
+                        <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Failed Auto-debits
+                      </th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                      <tr *ngFor="let sub of userSubscription">
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                          {{ sub?.productId?.location?.address }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                            {{sub?.productId?.totalPrice | currencyFormat}}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                          {{ sub?.outstanding | currencyFormat }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                            {{ sub?.type }}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6" >
+                            {{sub?.debits}}
+                        </td>
+                        <td class="px-2 py-4 whitespace-nowrap sm:px-6" >
+                            {{sub?.failed_debits}}
+                        </td>
+                          
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </ng-container>
+</div>

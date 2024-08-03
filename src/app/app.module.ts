@@ -14,13 +14,15 @@ import { LayoutComponent } from './layout/layout.component';
 import { ProductComponent } from './product/product.component';
 import { ProductModalComponent } from './common/product-modal/product-modal.component';
 import { UsersComponent } from './users/users.component';
+import { CurrencyFormatPipe } from './currency-formatter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
     ProductModalComponent,
-    UsersComponent
+    UsersComponent,
+    CurrencyFormatPipe
   ],
   imports: [
     BrowserModule,
