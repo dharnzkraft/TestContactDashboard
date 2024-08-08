@@ -9,8 +9,8 @@ import { UsersService } from '../services/users.service';
 })
 export class DashboardComponent {
   storedData: any[] = [];
-  productList: any;
-  userList: any;
+  productList: any[] | undefined;
+  userList: any[] | undefined;
 
   constructor(
     private productService: ProductService,

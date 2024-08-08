@@ -5,6 +5,7 @@ import { AddContactComponent } from '../add-contact/add-contact.component';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from '../product/product.component';
 import { UsersComponent } from '../users/users.component';
+import { SubscriptionsComponent } from '../subscriptions/subscriptions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   {
     path: "users",
     component: UsersComponent
-  }
+  },
+  {path: 'subscriptions', component: SubscriptionsComponent}
 ];
 
 @NgModule({

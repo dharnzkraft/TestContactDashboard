@@ -1,8 +1,8 @@
 <div class="overflow-x-auto">
   <div
-    class="min-w-full flex flex-col md:flex-col lg:flex-row items-center justify-center justify-between"
+    class="min-w-full flex flex-col md:flex-col lg:flex-row items-center h-auto justify-center justify-between"
   >
-    <div class="lg:p-2 m-2 w-full lg:basis-1/2">
+    <div class="lg:p-2  w-full lg:basis-1/2">
       <div class="flex justify-between mb-2">
         <h3>Products</h3>
         <div class="flex text-purple-900">
@@ -38,7 +38,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let product of productList">
+          <tr *ngFor="let product of productList | slice:-4">
             <td class="px-2 py-4 whitespace-nowrap sm:px-6">
               {{ product?.location?.address }}
             </td>
@@ -54,7 +54,7 @@
       </table>
     </div>
 
-    <div class="lg:p-2 m-2 w-full lg:basis-1/2">
+    <div class="lg:p-2  w-full lg:basis-1/2">
       <div class="flex justify-between mb-2">
         <h3>Users</h3>
         <div class="flex text-purple-900">
@@ -86,7 +86,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr *ngFor="let user of userList">
+          <tr *ngFor="let user of userList | slice:-4 ">
             <td class="px-2 py-4 whitespace-nowrap sm:px-6">
               {{ user?.fullName }}
             </td>
