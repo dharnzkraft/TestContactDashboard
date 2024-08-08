@@ -33,4 +33,8 @@ export class ProductService {
   public createProduct(payload: any){
     return this.http.post(this.baseUrl+`/product`, payload)
   }
+
+  public deleteProduct(id: any){
+    return this.http.delete(this.baseUrl+`/product/${id}`);
+  }
 }

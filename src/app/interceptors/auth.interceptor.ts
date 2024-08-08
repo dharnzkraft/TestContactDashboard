@@ -18,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const excludedEndpoints = [
       `${this.baseUrl}/auth/signin`, // Add other endpoints if needed
       `${this.baseUrl}/auth/signup`, // Add other endpoints if needed
+      `${this.baseUrl}/product`, // Add other endpoints if needed
     ];
 
     if (excludedEndpoints.some(url => req.url.includes(url))) {
@@ -25,9 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     if (authToken) {
+      console.log(authToken)
       authReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${authToken}`
+          Authorization: `${authToken}`
         }
       });
     }

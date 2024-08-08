@@ -4,7 +4,7 @@
       <div class="flex justify-end my-3">
         <button
           (click)="productState = 'addProduct'"
-          class="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Add New Product
         </button>
@@ -12,18 +12,21 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div
-          class="p-4 shadow text-white rounded"
+          class="p-4 shadow  rounded bg-white"
           *ngFor="let prod of productList"
         >
-          <img [src]="prod.veiw[0]" [alt]="prod?.location?.address" srcset="" />
+          <img [src]="prod.veiw[0]" [alt]="prod?.location?.address" style="height: 200px;" srcset="" />
+          <p class="text-center" > {{prod?.location.address}} </p>
           <div class="grid grid-cols-1 grid-cols-2 gap-4">
             <button
               (click)="openModal(prod.id)"
-              class="mt-2 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              class="mt-2 bg-purple-900 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
               View
             </button>
             <button
+
+            (click)="deleteProduct(prod.id)"
               class="mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
               Delete
@@ -33,6 +36,14 @@
       </div>
     </div>
     <div *ngSwitchCase="'addProduct'">
+      <div class="flex justify-end my-3">
+        <button
+          (click)="productState = 'viewProduct'"
+          class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Back
+        </button>
+      </div>
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-6">
@@ -140,10 +151,10 @@
         </div>
 
         <button
-          class="bg-blue-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          class="bg-purple-900 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           [disabled]="isEnabled"
         >
-          Add Product
+          {{isLoading? 'Loading....': 'Add Product'}}
         </button>
       </form>
     </div>

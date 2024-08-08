@@ -49,9 +49,9 @@ export class AuthPageComponent {
           setTimeout(async () => {
             // localStorage.setItem('userData', JSON.stringify(response?.data?.user_data));
             await localStorage.setItem('auth_token', response?.data?.token);
-           
-          }, 500);
-          this.router.navigateByUrl('/dashboard/dashboard')
+            this.router.navigateByUrl('/dashboard/dashboard')
+          }, 1000);
+          
         }
         console.log(response)
       },(error)=>{

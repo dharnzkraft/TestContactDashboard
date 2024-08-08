@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProductComponent {
   isModalOpen = false;
   productList: any;
+  isLoading: boolean = false;
   selectedProductId: any;
   productState: 'viewProduct' | 'addProduct' = 'viewProduct';
   isChecked = false;
@@ -57,6 +58,7 @@ export class ProductComponent {
   }
 
   onFileSelected(event: any, fieldName: string) {
+    this.isLoading = true
     const file: File = event.target.files[0];
 
     if (file) {
@@ -77,7 +79,7 @@ uploadImage(){
     }
     formData.append('image', this.formData.image);
     this.productService.convertImage(formData).subscribe((response: any)=>{
-        // this.loader.hide()
+        this.isLoading = false;
         console.log(response)
         if(response.success){
             this.isEnabled = false;
@@ -86,21 +88,36 @@ uploadImage(){
     })
 }
 
+deleteProduct(id: any){
+  this.productService.deleteProduct(id).subscribe((response: any)=>{
+    console.log(response)
+    if(response.success){
+      this.getProducts()
+    }
+  })
+}
+
 onSubmit(){
     // this.loader.show()
+    this.isLoading = true;
     console.log('fired')
     this.productForm.value.veiw = [this.productImage]
     this.productService.createProduct(this.productForm.value).subscribe((response: any)=>{
         // this.loader.hide()
+        this.isLoading = false;
         console.log(response)
         if(response.success){
             // this.notifier.success('Success', 'Product Added Successfully')
             // this.closeDialogue()
             alert('Product added successfully!');
-            this.getProducts()
+            this.getProducts();
+            this.productForm.reset()
             this.productState = 'viewProduct';
+
         }
+        alert(response.message)
     },(error)=>{
+      this.isLoading = false;
         // this.loader.hide()
         // this.notifier.error('Oops!', error.error.message)
         alert(error.error.message)
