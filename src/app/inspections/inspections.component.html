@@ -1,0 +1,115 @@
+<div class="min-h-screen bg-gray-100 p-8">
+  <ng-container [ngSwitch]="InspState">
+    <div *ngSwitchCase="'view'">
+      <div class="flex justify-end my-3">
+        <button
+          (click)="InspState = 'add'"
+          class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Add New Product
+        </button>
+      </div>
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th
+              class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+            >
+              Product Name
+            </th>
+            <th
+              class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+            >
+              Inspection Date
+            </th>
+            <th
+              class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+            >
+              Date Created
+            </th>
+            <th
+                  class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                >
+                  Action
+                </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let insp of allInspections">
+            <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+              {{ insp?.productId }}
+            </td>
+            <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+              {{ insp?.date | date : "longDate" }}
+            </td>
+            <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+              {{ insp?.createdAt | date : "longDate" }}
+            </td>
+            <td class="px-2 py-4 whitespace-nowrap sm:px-6" >
+                <button
+              (click)="viewInsp(insp.id)"
+              class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              VIEW
+            </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngSwitchCase="'add'">
+        <div class="flex justify-end my-3">
+            <button
+              (click)="InspState = 'view'"
+              class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              Back
+            </button>
+        </div>
+        <p class="font-2xl mt-3 mb-10" >Create Inspection Date</p>
+        <form  [formGroup]="inspectionForm" (ngSubmit)="onSubmitRegister()" >
+            <div class="">
+                <div class="mb-4 md:w-1/2 lg:w-1/2" >
+                    <label for="productId" class="block text-sm font-medium text-gray-700">Select Product</label>
+                    <select  formControlName="productId"
+                           class="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option>--Select Product--</option>
+                        <option *ngFor="let prod of allProducts" [value]="prod.id" > {{prod?.location?.address}} </option>
+                    </select>
+                    
+                </div>
+                <div class="mb-4 md:w-1/2 lg:w-1/2" >
+                    <label for="date" class="block text-sm font-medium text-gray-700">Inspection Date</label>
+                    <input type="date" id="date" formControlName="date"
+                            class="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+            <button
+            (click)="InspState = 'add'"
+            type="submit"
+            *ngIf="!inspectionForm.valid"
+            class="bg-purple-900 text-xs w-1/2 text-white py-3 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:ring-opacity-80"
+            >
+            Create Inspection
+            </button>
+        </form>
+    </div>
+    <div *ngSwitchCase="'viewMore'">
+        <div class="flex justify-end my-3">
+            <button
+              (click)="InspState = 'view'"
+              class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              Back
+            </button>
+        </div>
+        <div class="my-3">
+            <p class="text-3xl font-bold mb-5" >Inspection Date: {{viewedInsp?.date | date: 'longDate' }} </p>
+            
+            <img [src]="viewedInsp?.productId?.veiw[0]" class="mb-5" />
+            <p class="font-2xl font-bold mb-5" >Location: {{viewedInsp?.productId?.location?.address}} </p>
+            <p class="font-2xl font-bold mb-5" > Total Price: {{viewedInsp?.productId?.totalPrice | currencyFormat }} </p>
+        </div>
+    </div>
+  </ng-container>
+</div>

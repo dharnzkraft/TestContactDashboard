@@ -16,6 +16,7 @@ import { ProductModalComponent } from './common/product-modal/product-modal.comp
 import { UsersComponent } from './users/users.component';
 import { CurrencyFormatPipe } from './currency-formatter.pipe';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { InspectionsComponent } from './inspections/inspections.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SubscriptionsComponent } from './subscriptions/subscriptions.component'
     ProductModalComponent,
     UsersComponent,
     CurrencyFormatPipe,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+    InspectionsComponent
   ],
   imports: [
     BrowserModule,

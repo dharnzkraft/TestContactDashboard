@@ -45,5 +45,22 @@ export class UsersComponent {
     this.userState = 'viewUserDetails'
   }
   
+  blockUser(){
+    this.userService.blockUser().subscribe((response: any)=>{
+      console.log(response)
+      if(response.success){
+        alert('user blocked successfully!')
+      }
+    })
+  }
+
+  unblockUser(){
+    this.userService.unblockUser().subscribe((response: any)=>{
+      console.log(response)
+      if(response.success){
+        alert('user unblocked successfully!')
+      }
+    })
+  }
   
 }
