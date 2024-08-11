@@ -37,7 +37,7 @@
         <tbody class="bg-white divide-y divide-gray-200">
           <tr *ngFor="let insp of allInspections">
             <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-              {{ insp?.productId }}
+              {{ insp?.productId?.location?.address }}
             </td>
             <td class="px-2 py-4 whitespace-nowrap sm:px-6">
               {{ insp?.date | date : "longDate" }}

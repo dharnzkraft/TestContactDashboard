@@ -35,7 +35,7 @@ export class UsersComponent {
     const viewedUser =  this.userList.findIndex((item: { id: any; }) => item.id === id)
     this.viewedUser = this.userList[viewedUser]
     this.userService.getUserFullDetails(id).subscribe((response: any)=>{
-      console.log(response)
+      // console.log(response)
       if(response.success){
         this.userFullDetails = response.data
         this.userSubscription = this.userFullDetails.subscriptions
@@ -46,8 +46,8 @@ export class UsersComponent {
   }
   
   blockUser(){
-    this.userService.blockUser().subscribe((response: any)=>{
-      console.log(response)
+    this.userService.blockUser(this.viewedUser.id).subscribe((response: any)=>{
+      // console.log(response)
       if(response.success){
         alert('user blocked successfully!')
       }
@@ -55,8 +55,8 @@ export class UsersComponent {
   }
 
   unblockUser(){
-    this.userService.unblockUser().subscribe((response: any)=>{
-      console.log(response)
+    this.userService.unblockUser(this.viewedUser.id).subscribe((response: any)=>{
+      // console.log(response)
       if(response.success){
         alert('user unblocked successfully!')
       }

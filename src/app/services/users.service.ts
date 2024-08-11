@@ -21,12 +21,12 @@ export class UsersService {
     return this.http.get(this.baseUrl+`/user/full-details/${userId}`)
   }
 
-  public blockUser(){
-    return this.http.get(this.baseUrl+`/user/block/:userID`)
+  public blockUser(id: any){
+    return this.http.get(this.baseUrl+`/user/block/${id}`)
   }
 
-  public unblockUser(){
-    return this.http.get(this.baseUrl+`/user/unblock/:userID`)
+  public unblockUser(id: any){
+    return this.http.get(this.baseUrl+`/user/unblock/${id}`)
   }
 
   public createInspection(payload: any){
