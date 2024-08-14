@@ -19,6 +19,8 @@ export class ProductComponent {
     formData: any = {};
     isEnabled = true;
     productImage: any;
+  productImage2: any;
+  productImage3: any;
   constructor(
     private productService: ProductService,
     private _formBuilder: FormBuilder,
@@ -61,11 +63,33 @@ export class ProductComponent {
     this.isLoading = true
     const file: File = event.target.files[0];
 
-    if (file) {
-        this.selectedFiles[fieldName] = file;
+    if(file) {
+      this.selectedFiles[fieldName] = file;
     }
-    console.log(this.selectedFiles);
+    // console.log(this.selectedFiles);
     this.uploadImage()
+}
+
+onFileSelected2(event: any, fieldName: string) {
+  this.isLoading = true
+  const file: File = event.target.files[0];
+
+  if(file) {
+    this.selectedFiles[fieldName] = file;
+  }
+  // console.log(this.selectedFiles);
+  this.uploadImage2()
+}
+
+onFileSelected3(event: any, fieldName: string) {
+  this.isLoading = true
+  const file: File = event.target.files[0];
+
+  if(file) {
+    this.selectedFiles[fieldName] = file;
+  }
+  // console.log(this.selectedFiles);
+  this.uploadImage3()
 }
 
 uploadImage(){
@@ -80,12 +104,52 @@ uploadImage(){
     formData.append('image', this.formData.image);
     this.productService.convertImage(formData).subscribe((response: any)=>{
         this.isLoading = false;
-        console.log(response)
+        // console.log(response)
         if(response.success){
             this.isEnabled = false;
             this.productImage = response?.data?.image
         }
     })
+}
+
+uploadImage2(){
+  // this.loader.show()
+  const allBody = { ...this.selectedFiles };
+  const formData = new FormData();
+  for (const key in allBody) {
+      if (allBody.hasOwnProperty(key)) {
+          formData.append(key, allBody[key]);
+      }
+  }
+  formData.append('image2', this.formData.image);
+  this.productService.convertImage(formData).subscribe((response: any)=>{
+      this.isLoading = false;
+      // console.log(response)
+      if(response.success){
+          this.isEnabled = false;
+          this.productImage2 = response?.data?.image
+      }
+  })
+}
+
+uploadImage3(){
+  // this.loader.show()
+  const allBody = { ...this.selectedFiles };
+  const formData = new FormData();
+  for (const key in allBody) {
+      if (allBody.hasOwnProperty(key)) {
+          formData.append(key, allBody[key]);
+      }
+  }
+  formData.append('image3', this.formData.image);
+  this.productService.convertImage(formData).subscribe((response: any)=>{
+      this.isLoading = false;
+      // console.log(response)
+      if(response.success){
+          this.isEnabled = false;
+          this.productImage3 = response?.data?.image
+      }
+  })
 }
 
 deleteProduct(id: any){
@@ -100,20 +164,19 @@ deleteProduct(id: any){
 onSubmit(){
     // this.loader.show()
     this.isLoading = true;
-    console.log('fired')
-    this.productForm.value.veiw = [this.productImage]
+    // console.log('fired')
+    this.productForm.value.veiw = [this.productImage, this.productImage2, this.productImage3]
     this.productService.createProduct(this.productForm.value).subscribe((response: any)=>{
         // this.loader.hide()
         this.isLoading = false;
-        console.log(response)
+        // console.log(response)
         if(response.success){
-            // this.notifier.success('Success', 'Product Added Successfully')
-            // this.closeDialogue()
-            alert('Product added successfully!');
-            this.getProducts();
-            this.productForm.reset()
-            this.productState = 'viewProduct';
-
+          // this.notifier.success('Success', 'Product Added Successfully');
+          // this.closeDialogue();
+          alert('Product added successfully!');
+          this.getProducts();
+          this.productForm.reset();
+          this.productState = 'viewProduct';
         }
         alert(response.message)
     },(error)=>{

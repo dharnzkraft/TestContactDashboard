@@ -148,11 +148,34 @@
               (change)="onFileSelected($event, 'image')"
             />
           </div>
+          <div class="col-md-4 mb-4" *ngIf="productForm.get('category')?.value === 'Shortlet'" >
+            <label class="block text-sm font-medium text-gray-700"
+              >Other Apartment Image</label
+            >
+            <input
+              class="file-uploader"
+              type="file"
+              [multiple]="false"
+              (change)="onFileSelected2($event, 'image')"
+            />
+          </div>
+          <div class="col-md-4 mb-4" *ngIf="productForm.get('category')?.value === 'Shortlet'" >
+            <label class="block text-sm font-medium text-gray-700"
+              >Other Apartment  Image</label
+            >
+            <input
+              class="file-uploader"
+              type="file"
+              [multiple]="false"
+              (change)="onFileSelected3($event, 'image')"
+            />
+          </div>
         </div>
-
+        
         <button
           class="bg-purple-900 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           [disabled]="isEnabled"
+          *ngIf="!isEnabled"
         >
           {{isLoading? 'Loading....': 'Add Product'}}
         </button>
