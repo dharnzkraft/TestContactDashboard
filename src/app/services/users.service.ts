@@ -40,5 +40,17 @@ export class UsersService {
   public getOneInspection(id: any){
     return this.http.get(this.baseUrl+`/inspection/${id}`)
   }
+
+  public getWithdrawalRequests(){
+    return this.http.get(this.baseUrl+`/user/withdrawals`)
+  }
+
+  public approveWithdrawal(id: any){
+    return this.http.get(this.baseUrl+`/user/withdrawal/approve/${id}`)
+  }
+
+  public disapproveWithdrawal(id: any){
+    return this.http.get(this.baseUrl+`/user/withdrawal/disapprove/${id}`)
+  }
   
 }

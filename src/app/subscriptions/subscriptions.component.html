@@ -1,1 +1,68 @@
-<p>subscriptions works!</p>
+<div class="overflow-x-auto">
+    <div
+      class="min-w-full  items-center h-auto justify-center justify-between"
+    >
+      <div class="lg:p-2  w-full ">
+        
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-800 text-white">
+            <tr>
+              <th
+                class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+              >
+                User 
+              </th>
+              <th
+                class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+              >
+                Source
+              </th>
+              <th
+              class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+            >
+              Amount
+            </th>
+              <th
+                class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+              >
+                Status
+              </th>
+              <th
+                class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+              >
+                Request Date
+              </th>
+              <th
+                class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+              >
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let withdrawal of remappedWithdrawal">
+              <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                {{ withdrawal?.user }}
+              </td>
+              <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                {{ withdrawal?.source }}
+              </td>
+              <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                {{ withdrawal?.amount | currencyFormat }}
+              </td>
+              <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                {{ withdrawal?.status  }}
+              </td>
+              <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                {{ withdrawal?.createdAt | date: 'longDate' }}
+              </td>
+              <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                <a class="text-purple-900 font-xs font-bold " (click)="approveWithdrawal(withdrawal?.id)" >Approve</a> | <a (click)="disapproveWithdrawal(withdrawal?.id)" class="text-red-500 font-xs font-bold " >Decline</a>
+              </td>
+              <!-- <td class="px-2 py-4 whitespace-nowrap sm:px-6">VIEW</td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

@@ -24,7 +24,7 @@ const routes: Routes = [
     path: "users",
     component: UsersComponent
   },
-  {path: 'subscriptions', component: SubscriptionsComponent},
+  {path: 'withdrawals', component: SubscriptionsComponent},
   { path: 'inspections', component: InspectionsComponent }
 ];
 
