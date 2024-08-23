@@ -8,6 +8,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AddContactComponent } from '../add-contact/add-contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthPageComponent } from '../auth-page/auth-page.component';
+import { CurrencyFormatPipe } from '../currency-formatter.pipe';
+import { NairaCurrencyPipe } from '../naira-currency.pipe';
+import { TransactionsComponent } from '../transactions/transactions.component';
 
 
 @NgModule({
@@ -16,8 +19,10 @@ import { AuthPageComponent } from '../auth-page/auth-page.component';
     SidebarComponent,
     DashboardComponent,
     AddContactComponent,
-    AuthPageComponent
-    
+    AuthPageComponent,
+    CurrencyFormatPipe,
+    NairaCurrencyPipe,
+    TransactionsComponent
   ],
   imports: [
     CommonModule,
@@ -25,10 +30,8 @@ import { AuthPageComponent } from '../auth-page/auth-page.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  // exports: [
-  //   SidebarComponent,
-  //   DashboardComponent,
-  //   AddContactComponent
-  // ]
+  exports: [
+    CurrencyFormatPipe
+  ]
 })
 export class LayoutModule { }

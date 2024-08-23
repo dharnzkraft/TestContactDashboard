@@ -1,0 +1,87 @@
+<div class="overflow-x-auto">
+    <ng-container [ngSwitch]="tranState">
+        <div *ngSwitchCase="'transactions'">
+            <div class="lg:p-2  w-full lg:basis-1/2 mt-5">
+                <div class="flex justify-between mb-2">
+                  <h3>Transactions</h3>
+                  <div class="flex text-purple-900">
+                    <span class="text-purple-900 text-xs" >See More</span>&nbsp;
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle font-xs" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                    </svg> -->
+                  </div>
+                </div>
+                <table class="min-w-full divide-y divide-gray-200 ">
+                  <thead class="bg-gray-800 text-white">
+                    <tr>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                         Customer Name
+                      </th>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Description
+                      </th>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Amount
+                      </th>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    <tr *ngFor="let tran of transactions">
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ tran?.user?.fullName }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ tran?.description }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ tran?.amount | nairaCurrency }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ tran?.status }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        <button class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs" (click)="ShowTransaction(tran.id)" >VIEW</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        <div *ngSwitchCase="'viewTransactioins'" class="bg-white p-3 rounded-md" >
+            <div class="flex justify-end my-3">
+                <button
+                  (click)="tranState = 'transactions'"
+                  class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  Back
+                </button>
+            </div>
+
+            <h4 class="text-3xl " > {{selectedTransaction?.user?.fullName}}'s Transaction Details</h4>
+            <div class="mt-8" >
+                <p>Amount: {{selectedTransaction.amount | currencyFormat }} </p>
+                <p>Transactoin Date: {{selectedTransaction.createdAt | date: 'longDate' }} </p>
+                <p>Description: {{selectedTransaction.description  }} </p>
+                <p>Email: {{selectedTransaction?.user?.email  }} </p>
+                <p>Phone Number: {{selectedTransaction?.user?.phoneNumber  }} </p>
+            </div>
+        </div>
+    </ng-container>
+    
+</div>

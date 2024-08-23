@@ -17,6 +17,9 @@ import { UsersComponent } from './users/users.component';
 import { CurrencyFormatPipe } from './currency-formatter.pipe';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { InspectionsComponent } from './inspections/inspections.component';
+import { OffersComponent } from './offers/offers.component';
+import { NairaCurrencyPipe } from './naira-currency.pipe';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import { InspectionsComponent } from './inspections/inspections.component';
     ProductComponent,
     ProductModalComponent,
     UsersComponent,
-    CurrencyFormatPipe,
     SubscriptionsComponent,
-    InspectionsComponent
+    InspectionsComponent,
+    OffersComponent,
+    CurrencyFormatPipe
   ],
   imports: [
     BrowserModule,

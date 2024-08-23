@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-gray-100 p-8">
+    <ng-container [ngSwitch]="offerState">
+        <div *ngSwitchCase="'viewOffers'">
+            <div class="flex justify-end my-3">
+                <button
+                  (click)="offerState = 'createOffers'"
+                  class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  Create Offer
+                </button>
+              </div>
+        
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div
+                  class="p-4 shadow  rounded bg-white"
+                  *ngFor="let prod of offers"
+                >
+                  <img [src]="prod.images[0]" [alt]="prod?.description" style="height: 130px;" srcset="" />
+                  <button  class="mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" (click)="delete(prod.id)">Delete</button>
+                </div>
+              </div>
+        </div>
+        <div *ngSwitchCase="'createOffers'">
+            <div class="flex justify-end my-3">
+                <button
+                  (click)="offerState = 'createOffers'"
+                  class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  Back
+                </button>
+              </div>
+
+              <form [formGroup]="offerForm" (ngSubmit)="onSubmit()" >
+                <div class="col-md-4 mb-4">
+                    <label class="block text-sm font-medium text-gray-700"
+                      >Offer Image</label
+                    >
+                    <input
+                      class="file-uploader"
+                      type="file"
+                      [multiple]="false"
+                      (change)="onFileSelected($event, 'image')"
+                    />
+                  </div>
+                  <button
+          class="bg-purple-900 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          [disabled]="isLoading"
+          
+        >
+          {{isLoading? 'Loading....': 'Submit'}}
+        </button>
+              </form>
+        </div>
+    </ng-container>
+</div>

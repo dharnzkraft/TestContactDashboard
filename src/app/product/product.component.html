@@ -15,7 +15,9 @@
           class="p-4 shadow  rounded bg-white"
           *ngFor="let prod of productList"
         >
-          <img [src]="prod.veiw[0]" [alt]="prod?.location?.address" style="height: 200px;" srcset="" />
+          <div class="text-center w-100">
+            <img [src]="prod.veiw[0]" [alt]="prod?.location?.address" style="height: 200px;" srcset="" />
+          </div>
           <p class="text-center" > {{prod?.location.address}} </p>
           <div class="grid grid-cols-1 grid-cols-2 gap-4">
             <button

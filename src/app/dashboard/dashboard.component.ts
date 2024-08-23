@@ -11,6 +11,7 @@ export class DashboardComponent {
   storedData: any[] = [];
   productList: any[] | undefined;
   userList: any[] | undefined;
+  transactions: any[] | undefined;
 
   constructor(
     private productService: ProductService,
@@ -19,6 +20,14 @@ export class DashboardComponent {
     this.fetchFromLocalStorage()
     this.getProducts()
     this.getUsers()
+    this.getAllTransactions()
+  }
+
+  getAllTransactions(){
+    this.productService.getAllTransactions().subscribe((response: any)=>{
+      console.log(response)
+      this.transactions = response.data
+    })
   }
 
   fetchFromLocalStorage(): void {

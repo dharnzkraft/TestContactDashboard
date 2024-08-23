@@ -93,23 +93,26 @@ onFileSelected3(event: any, fieldName: string) {
 }
 
 uploadImage(){
-    // this.loader.show()
-    const allBody = { ...this.selectedFiles };
-    const formData = new FormData();
-    for (const key in allBody) {
-        if (allBody.hasOwnProperty(key)) {
-            formData.append(key, allBody[key]);
-        }
-    }
-    formData.append('image', this.formData.image);
-    this.productService.convertImage(formData).subscribe((response: any)=>{
-        this.isLoading = false;
-        // console.log(response)
-        if(response.success){
-            this.isEnabled = false;
-            this.productImage = response?.data?.image
-        }
-    })
+  // this.loader.show()
+  const allBody = { ...this.selectedFiles };
+  const formData = new FormData();
+  for (const key in allBody) {
+      if (allBody.hasOwnProperty(key)) {
+          formData.append(key, allBody[key]);
+      }
+  }
+  formData.append('image', this.formData.image);
+  this.productService.convertImage(formData).subscribe((response: any)=>{
+      this.isLoading = false;
+      // console.log(response)
+      if(response.success){
+          this.isEnabled = false;
+          this.productImage = response?.data?.image
+      }
+  },(error)=>{
+    this.isLoading = false;
+    alert(error.error.message)
+  })
 }
 
 uploadImage2(){
@@ -129,6 +132,9 @@ uploadImage2(){
           this.isEnabled = false;
           this.productImage2 = response?.data?.image
       }
+  },(error)=>{
+    this.isLoading = false;
+    alert(error.error.message)
   })
 }
 
@@ -149,6 +155,9 @@ uploadImage3(){
           this.isEnabled = false;
           this.productImage3 = response?.data?.image
       }
+  },(error)=>{
+    this.isLoading = false;
+    alert(error.error.message)
   })
 }
 

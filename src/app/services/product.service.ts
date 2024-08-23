@@ -37,4 +37,20 @@ export class ProductService {
   public deleteProduct(id: any){
     return this.http.delete(this.baseUrl+`/product/${id}`);
   }
+
+  public getOffers(){
+    return this.http.get(this.baseUrl+`/offer`)
+  }
+
+  public createOffers(payload: any){
+    return this.http.post(this.baseUrl+`/offer/create`, payload)
+  }
+
+  public deleteOffer(id: any){
+    return this.http.delete(this.baseUrl+`/offer/${id}`)
+  }
+
+  public getAllTransactions(){
+    return this.http.get(this.baseUrl+`/transaction`)
+  }
 }
