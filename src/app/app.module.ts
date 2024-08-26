@@ -20,6 +20,7 @@ import { InspectionsComponent } from './inspections/inspections.component';
 import { OffersComponent } from './offers/offers.component';
 import { NairaCurrencyPipe } from './naira-currency.pipe';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
