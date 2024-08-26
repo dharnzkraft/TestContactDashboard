@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +7,14 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  adminType: any;
+
+  constructor(private userService: UsersService){
+    this.userService.getLoggedInUser().subscribe((response: any)=>{
+      console.log(response)
+      this.adminType = response.data?.role
+    })
+  }
 
   sidebarVisible = true;
   isMobile = false;
@@ -24,6 +33,12 @@ export class SidebarComponent {
     if (!this.isMobile) {
       this.sidebarVisible = true;
     }
+  }
+
+  
+
+  logout(){
+    
   }
 
   // toggleSidebar() {

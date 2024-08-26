@@ -52,5 +52,17 @@ export class UsersService {
   public disapproveWithdrawal(id: any){
     return this.http.get(this.baseUrl+`/user/withdrawal/disapprove/${id}`)
   }
+
+  public getLoggedInUser(){
+    return this.http.get(this.baseUrl+`/user/profile`)
+  }
+
+  public getAnalytics(){
+    return this.http.get(this.baseUrl+`/admin/analytics`)
+  }
+
+  public searchQuery(fromDate: string, toDate: string, term: string, limit?: number, page?: number){
+    return this.http.get(this.baseUrl+`/admin/users?from_date=${fromDate}&to_date=${toDate}&search_term=${term}&limit=${limit}&page=${page}`)
+  }
   
 }

@@ -75,7 +75,7 @@
 
             <h4 class="text-3xl " > {{selectedTransaction?.user?.fullName}}'s Transaction Details</h4>
             <div class="mt-8" >
-                <p>Amount: {{selectedTransaction.amount | currencyFormat }} </p>
+                <p>Amount: {{selectedTransaction.amount | nairaCurrency }} </p>
                 <p>Transactoin Date: {{selectedTransaction.createdAt | date: 'longDate' }} </p>
                 <p>Description: {{selectedTransaction.description  }} </p>
                 <p>Email: {{selectedTransaction?.user?.email  }} </p>

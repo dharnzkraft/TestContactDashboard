@@ -12,6 +12,8 @@ export class DashboardComponent {
   productList: any[] | undefined;
   userList: any[] | undefined;
   transactions: any[] | undefined;
+  analytics: any;
+  userCount: any;
 
   constructor(
     private productService: ProductService,
@@ -21,6 +23,8 @@ export class DashboardComponent {
     this.getProducts()
     this.getUsers()
     this.getAllTransactions()
+    this.getAnalytics()
+    this.getNewUsers()
   }
 
   getAllTransactions(){
@@ -54,6 +58,47 @@ export class DashboardComponent {
       
     })
   }
+
+  getAnalytics(){
+    this.userService.getAnalytics().subscribe((response: any)=>{
+      if(response.success){
+        this.analytics = response.data
+      }
+    })
+  }
+
+  getNewUsers(){
+    this.userService.searchQuery(this.getFormattedDate(400), this.getTodayDateFormatted(), 'user').subscribe((response: any)=>{
+      console.log(response)
+      this.userCount = response.data?.length
+    })
+  }
+
+  addDaysToDate(days: number): Date {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + days);
+    return currentDate;
+  }
+
+  getFormattedDate(daysToSubtract: number = 0): string {
+    const today = new Date();
+    today.setDate(today.getDate() - daysToSubtract);
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
+
+  getTodayDateFormatted(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed, so we add 1
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+}
+  
 
 
 }

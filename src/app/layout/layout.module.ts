@@ -8,7 +8,6 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AddContactComponent } from '../add-contact/add-contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthPageComponent } from '../auth-page/auth-page.component';
-import { CurrencyFormatPipe } from '../currency-formatter.pipe';
 import { NairaCurrencyPipe } from '../naira-currency.pipe';
 import { TransactionsComponent } from '../transactions/transactions.component';
 
@@ -20,7 +19,6 @@ import { TransactionsComponent } from '../transactions/transactions.component';
     DashboardComponent,
     AddContactComponent,
     AuthPageComponent,
-    CurrencyFormatPipe,
     NairaCurrencyPipe,
     TransactionsComponent
   ],
@@ -31,7 +29,6 @@ import { TransactionsComponent } from '../transactions/transactions.component';
     FormsModule
   ],
   exports: [
-    CurrencyFormatPipe
   ]
 })
 export class LayoutModule { }
