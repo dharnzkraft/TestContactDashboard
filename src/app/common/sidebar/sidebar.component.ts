@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class SidebarComponent {
   adminType: any;
 
-  constructor(private userService: UsersService){
+  constructor(private userService: UsersService, private router: Router){
     this.userService.getLoggedInUser().subscribe((response: any)=>{
       console.log(response)
       this.adminType = response.data?.role
@@ -38,7 +39,8 @@ export class SidebarComponent {
   
 
   logout(){
-    
+    localStorage.clear()
+    this.router.navigateByUrl('/')
   }
 
   // toggleSidebar() {
