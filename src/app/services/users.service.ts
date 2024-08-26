@@ -33,6 +33,10 @@ export class UsersService {
     return this.http.post(this.baseUrl+`/inspection/create`, payload)
   }
 
+  public deleteInspection(id: any){
+    return this.http.delete(this.baseUrl+`/inspection/${id}`);
+  }
+
   public getAllInspections(){
     return this.http.get(this.baseUrl+`/inspection/all`)
   }

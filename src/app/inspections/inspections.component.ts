@@ -46,6 +46,12 @@ export class InspectionsComponent {
     })
   }
 
+  deleteInspection(id: any){
+    this.userService.deleteInspection(id).subscribe((response: any)=>{
+      console.log(response)
+    })
+  }
+
   onSubmitRegister(){
     if(this.inspectionForm.valid){
       this.userService.createInspection(this.inspectionForm.value).subscribe((response: any)=>{

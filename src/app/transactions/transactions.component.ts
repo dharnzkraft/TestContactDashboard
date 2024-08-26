@@ -14,7 +14,8 @@ export class TransactionsComponent {
   constructor(
     private productService: ProductService
   ){
-this.getAllTransactions()
+    this.getAllTransactions()
+    this.getPaginated()
   }
 
   getAllTransactions(){
@@ -28,5 +29,11 @@ this.getAllTransactions()
     const selectedTransaction = this.transactions?.findIndex((item: { id: any; }) => item.id === id);
     this.selectedTransaction = this.transactions[selectedTransaction]
     this.tranState = 'viewTransactioins';
+  }
+
+  getPaginated(){
+    this.productService.getPaginatedTransaction('transaction',20,1).subscribe((response: any)=>{
+      console.log(response)
+    })
   }
 }

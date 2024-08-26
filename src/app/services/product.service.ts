@@ -53,4 +53,10 @@ export class ProductService {
   public getAllTransactions(){
     return this.http.get(this.baseUrl+`/transaction`)
   }
+
+  public getPaginatedTransaction(term?:string, limit?:number, page?:number){
+    return this.http.get(this.baseUrl+`/admin/transactions?search_term=${term}&limit=${limit}&page=${page}`)
+  }
+
+  
 }
