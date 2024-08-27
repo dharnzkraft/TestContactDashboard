@@ -45,7 +45,7 @@ export class AuthPageComponent {
       console.log('Login:', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe((response: any)=>{
         this.isLoading = false;
-        if(response.success && response.data?.user_data.role === 'admin' || 'super_admin' ){
+        if( response.data?.user_data.role !== 'user' ){
           setTimeout(async () => {
             // localStorage.setItem('userData', JSON.stringify(response?.data?.user_data));
             await localStorage.setItem('auth_token', response?.data?.token);
@@ -53,6 +53,7 @@ export class AuthPageComponent {
           }, 1000);
           
         }
+        // alert('You do not have admin access')
         console.log(response)
       },(error)=>{
         this.isLoading = false;

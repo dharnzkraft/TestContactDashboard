@@ -65,7 +65,7 @@ export class UsersService {
     return this.http.get(this.baseUrl+`/admin/analytics`)
   }
 
-  public searchQuery(fromDate: string, toDate: string, term: string, limit?: number, page?: number){
+  public searchQuery(fromDate?: string, toDate?: string, term?: string, limit?: number, page?: number){
     return this.http.get(this.baseUrl+`/admin/users?from_date=${fromDate}&to_date=${toDate}&search_term=${term}&limit=${limit}&page=${page}`)
   }
   

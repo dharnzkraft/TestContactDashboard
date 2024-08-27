@@ -14,6 +14,9 @@ export class SidebarComponent {
     this.userService.getLoggedInUser().subscribe((response: any)=>{
       console.log(response)
       this.adminType = response.data?.role
+      if(this.adminType === 'user' ){
+        this.router.navigateByUrl('/')
+      }
     })
   }
 

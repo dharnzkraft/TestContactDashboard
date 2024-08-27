@@ -68,7 +68,7 @@ export class DashboardComponent {
   }
 
   getNewUsers(){
-    this.userService.searchQuery(this.getFormattedDate(400), this.getTodayDateFormatted(), 'user', 20, 1).subscribe((response: any)=>{
+    this.userService.searchQuery(this.getFormattedDate(400), '', 'user', 2000000, 1).subscribe((response: any)=>{
       console.log(response)
       this.userCount = response.data?.length
     })

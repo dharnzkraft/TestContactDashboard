@@ -49,6 +49,9 @@ export class InspectionsComponent {
   deleteInspection(id: any){
     this.userService.deleteInspection(id).subscribe((response: any)=>{
       console.log(response)
+      if(response.success){
+        this.getInspections()
+      }
     })
   }
 

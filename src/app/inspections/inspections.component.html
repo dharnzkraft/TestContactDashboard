@@ -63,6 +63,9 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="!allInspections.length" class="flex" >
+        <img src="../../assets/empty-result.svg" class="m-auto" alt="" srcset="">
+      </div>
     </div>
     <div *ngSwitchCase="'add'">
         <div class="flex justify-end my-3">

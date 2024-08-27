@@ -57,7 +57,7 @@
                 {{ withdrawal?.createdAt | date: 'longDate' }}
               </td>
               <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-                <a class="text-purple-900 font-xs font-bold " (click)="approveWithdrawal(withdrawal?.id)" >Approve</a> | <a (click)="disapproveWithdrawal(withdrawal?.id)" class="text-red-500 font-xs font-bold " >Decline</a>
+                <a class="font-xs font-bold" *ngIf="withdrawal?.status !== 'PENDING' " >Completed</a> <a *ngIf="withdrawal?.status == 'PENDING' " class="text-purple-900 font-xs font-bold " (click)="approveWithdrawal(withdrawal?.id)" >Approve</a> &nbsp; <a *ngIf="withdrawal?.status == 'PENDING' " (click)="disapproveWithdrawal(withdrawal?.id)" class="text-red-500 font-xs font-bold " >Decline</a>
               </td>
               <!-- <td class="px-2 py-4 whitespace-nowrap sm:px-6">VIEW</td> -->
             </tr>
