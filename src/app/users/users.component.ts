@@ -7,6 +7,7 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
+  searchQuery: string = '';
   userList: any;
   public userState: "viewUsers" | "viewUserDetails" = "viewUsers";
   viewedUser: any;
@@ -19,14 +20,25 @@ export class UsersComponent {
     this.getUsers()
   }
 
-  getUsers(){
-    this.userService.getUsers().subscribe((response: any)=>{
+  
+
+  onSearch(): void {
+    console.log('Searching for:', this.searchQuery);
+    // Implement search logic here
+    this.userService.searchQuery('','',this.searchQuery,5000000,1).subscribe((response: any)=>{
       console.log(response)
       if(response.success){
         this.userList = response.data
-        
       }
-      
+    })
+  }
+
+  getUsers(){
+    this.userService.searchQuery('','','',5000000,1).subscribe((response: any)=>{
+      console.log(response)
+      if(response.success){
+        this.userList = response.data
+      }
     })
   }
 
@@ -41,7 +53,7 @@ export class UsersComponent {
         this.userSubscription = this.userFullDetails.subscriptions
       }
     })
-    console.log(this.viewedUser)
+    // console.log(this.viewedUser)
     this.userState = 'viewUserDetails'
   }
   
@@ -50,6 +62,14 @@ export class UsersComponent {
       // console.log(response)
       if(response.success){
         alert('user blocked successfully!')
+      }
+    })
+  }
+
+  makeAMaketter(id: any){
+    this.userService.makeUserMaketer(id).subscribe((response: any)=>{
+      if(response.success){
+        alert('Success')
       }
     })
   }

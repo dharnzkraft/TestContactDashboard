@@ -1,6 +1,15 @@
 <div class="p-5" >
     <ng-container [ngSwitch]="userState">
         <div *ngSwitchCase="'viewUsers'">
+          <div class="flex justify-end my-3">
+            <input
+              type="text"
+              placeholder="Search by name or email..."
+              [(ngModel)]="searchQuery"
+              (input)="onSearch()"
+              class="w-full max-w-lg px-4 py-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-800 text-white">
                   <tr>
@@ -222,8 +231,11 @@
                     </tbody>
                 </table>
             </div>
-
-            <button class="bg-red-500 px-5 mt-5 py-2 rounded shadow text-white text-xs" (click)="blockUser()" >Block User</button>
+            <div class="d-flex">
+              <button class="bg-red-500 px-5 mt-5 py-2 rounded shadow text-white text-xs" (click)="blockUser()" >Block User</button>
+              <button class="bg-purple-900 px-5 mt-5 py-2 rounded shadow text-white text-xs mx-5" (click)="makeAMaketter(this.viewedUser.id)" > Make User a marketer</button>
+            </div>
+           
         </div>
     
     </ng-container>

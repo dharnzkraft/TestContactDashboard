@@ -64,7 +64,6 @@ export class InspectionsComponent {
         }
       })
     }
-    alert('Fill in all the fields')
   }
 
   viewInsp(id: any){

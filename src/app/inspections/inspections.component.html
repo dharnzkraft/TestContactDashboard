@@ -63,7 +63,7 @@
           </tr>
         </tbody>
       </table>
-      <div *ngIf="!allInspections.length" class="flex" >
+      <div *ngIf="!allInspections?.length" class="flex" >
         <img src="../../assets/empty-result.svg" class="m-auto" alt="" srcset="">
       </div>
     </div>
@@ -97,7 +97,7 @@
             <button
             (click)="InspState = 'add'"
             type="submit"
-            *ngIf="!inspectionForm.valid"
+            *ngIf="inspectionForm.valid"
             class="bg-purple-900 text-xs w-1/2 text-white py-3 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:ring-opacity-80"
             >
             Create Inspection
@@ -116,7 +116,7 @@
         <div class="my-3">
             <p class="text-3xl font-bold mb-5" >Inspection Date: {{viewedInsp?.date | date: 'longDate' }} </p>
             
-            <img [src]="viewedInsp?.productId?.veiw[0]" class="mb-5" />
+            <img [src]="viewedInsp?.productId?.veiw[0]" class="mb-5" height="300" />
             <p class="font-2xl font-bold mb-5" >Location: {{viewedInsp?.productId?.location?.address}} </p>
             <p class="font-2xl font-bold mb-5" > Total Price: {{viewedInsp?.productId?.totalPrice | currencyFormat }} </p>
         </div>

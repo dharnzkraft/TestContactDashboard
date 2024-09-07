@@ -49,14 +49,14 @@ export class DashboardComponent {
   }
 
   getUsers(){
-    this.userService.getUsers().subscribe((response: any)=>{
-      console.log(response)
-      if(response.success){
-        this.userList = response.data
+    // this.userService.getUsers().subscribe((response: any)=>{
+    //   console.log(response)
+    //   if(response.success){
+    //     this.userList = response.data
         
-      }
+    //   }
       
-    })
+    // })
   }
 
   getAnalytics(){
@@ -68,9 +68,10 @@ export class DashboardComponent {
   }
 
   getNewUsers(){
-    this.userService.searchQuery(this.getFormattedDate(400), '', 'user', 2000000, 1).subscribe((response: any)=>{
+    this.userService.searchQuery(this.getFormattedDate(400), '', '', 2000000, 1).subscribe((response: any)=>{
       console.log(response)
       this.userCount = response.data?.length
+      this.userList = response.data
     })
   }
 

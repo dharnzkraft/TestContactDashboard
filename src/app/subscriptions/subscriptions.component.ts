@@ -10,7 +10,7 @@ export class SubscriptionsComponent {
   withdrawals: any;
   userList: any;
   remappedWithdrawal: any;
-  
+  public transferState: 'viewTransfersHistory' | 'makeTransfer' ='viewTransfersHistory' ;
 
   constructor(
     private userService: UsersService
