@@ -26,7 +26,7 @@ import { TransactionsComponent } from '../transactions/transactions.component';
     CommonModule,
     LayoutRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
   ]

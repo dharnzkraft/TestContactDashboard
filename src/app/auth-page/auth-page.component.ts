@@ -22,7 +22,9 @@ export class AuthPageComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      deviceId: 'admin-web',
+        deviceName: 'web'
     });
 
     this.registerForm = this.fb.group({
@@ -30,7 +32,8 @@ export class AuthPageComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       phoneNumber: ['', [Validators.required] ],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      
     }, { validator: this.passwordMatchValidator });
   }
 
@@ -57,6 +60,7 @@ export class AuthPageComponent {
         console.log(response)
       },(error)=>{
         this.isLoading = false;
+        alert(error.error.message)
       })
     }
   }

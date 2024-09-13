@@ -32,4 +32,8 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     // Redirect to login or handle logout
   }
+
+  enable2fa(){
+    return this.http.get(this.baseUrl+`/auth/enable/2fa`);
+  }
 }

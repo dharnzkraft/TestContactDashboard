@@ -1,5 +1,5 @@
 <div
-  class="md:w-1/6 w-1/5 bg-gray-800 text-white h-screen fixed top-0 left-0 transform transition-transform duration-300 ease-in-out "
+  class="md:w-1/6 w-1/5 bg-[url('/assets/dashboard.svg')] bg-cover bg-center text-white h-screen fixed top-0 left-0 transform transition-transform duration-300 ease-in-out "
   [ngClass]="{
     'translate-x-0': sidebarVisible || !isMobile,
     '-translate-x-full': !sidebarVisible && isMobile
@@ -9,7 +9,8 @@
     <div class="bg-orange-300 rounded py-10 text-center d-flex mb-5">
       <img src="../../../assets/logo2.png" class="m-auto" width="100" alt="" />
     </div>
-    <div>
+   <div class="bg-gray-700 bg-opacity-90 p-3 rounded-md min-h-64" >
+    <div class="font-small" >
       <a
         routerLink="/dashboard/dashboard"
         routerLinkActive="active"
@@ -42,7 +43,7 @@
         </svg>
       </a>
     </div>
-    <div>
+    <div class="font-small" >
       <a
         routerLink="/dashboard/product"
         routerLinkActive="active"
@@ -74,7 +75,7 @@
         </svg>
       </a>
     </div>
-    <div>
+    <div class="font-small" >
       <a
         routerLink="/dashboard/users"
         routerLinkActive="active"
@@ -106,7 +107,7 @@
         </svg>
       </a>
     </div>
-    <div *ngIf="adminType == 'super_admin' " >
+    <div class="font-small" *ngIf="adminType == 'super_admin' " >
       <a
         routerLink="/dashboard/withdrawals"
         routerLinkActive="active"
@@ -138,7 +139,7 @@
         </svg>
       </a>
     </div>
-    <div>
+    <div class="font-small" >
       <a
         routerLink="/dashboard/inspections"
         routerLinkActive="active"
@@ -170,7 +171,7 @@
         </svg>
       </a>
     </div>
-    <div>
+    <div class="font-small" >
       <a
         routerLink="/dashboard/offers"
         routerLinkActive="active"
@@ -202,7 +203,7 @@
         </svg>
       </a>
     </div>
-    <div>
+    <div class="font-small" >
       <a
         routerLink="/dashboard/transactions"
         routerLinkActive="active"
@@ -234,9 +235,10 @@
         </svg>
       </a>
     </div>
-    <div class="bg-green-300 rounded py-2 text-center d-flex mt-8 " >
+    <div class="bg-green-300 rounded font-small py-2 text-center d-flex mt-8 " >
       <button class="text-red-400 " (click)="logout()" >Log Out</button>
     </div>
+   </div>
   </div>
   
 </div>

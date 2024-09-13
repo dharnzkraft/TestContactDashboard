@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -13,11 +14,21 @@ export class UsersComponent {
   viewedUser: any;
   userFullDetails: any;
   userSubscription: any;
+  adminType: any;
+  isUserBlocked!: boolean;
 
   constructor(
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ){
     this.getUsers()
+    this.userService.getLoggedInUser().subscribe((response: any)=>{
+      console.log(response)
+      this.adminType = response.data?.role
+      if(this.adminType === 'user' ){
+        // this.router.navigateByUrl('/')
+      }
+    })
   }
 
   
@@ -51,6 +62,7 @@ export class UsersComponent {
       if(response.success){
         this.userFullDetails = response.data
         this.userSubscription = this.userFullDetails.subscriptions
+        this.isUserBlocked = response.data?.isBlocked
       }
     })
     // console.log(this.viewedUser)
@@ -67,7 +79,15 @@ export class UsersComponent {
   }
 
   makeAMaketter(id: any){
-    this.userService.makeUserMaketer(id).subscribe((response: any)=>{
+    this.userService.makeUserMaketer(id, 'marketter').subscribe((response: any)=>{
+      if(response.success){
+        alert('Success')
+      }
+    })
+  }
+
+  makeAdmin(id: any){
+    this.userService.makeUserMaketer(id, 'admin').subscribe((response: any)=>{
       if(response.success){
         alert('Success')
       }
@@ -82,5 +102,7 @@ export class UsersComponent {
       }
     })
   }
+
+  
   
 }

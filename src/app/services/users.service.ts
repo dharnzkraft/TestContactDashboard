@@ -69,7 +69,7 @@ export class UsersService {
     return this.http.get(this.baseUrl+`/admin/users?from_date=${fromDate}&to_date=${toDate}&search_term=${term}&limit=${limit}&page=${page}`)
   }
   
-  public makeUserMaketer(userId: any){
-    return this.http.get(this.baseUrl+`/admin/update-user-role/${userId}?role=marketter`)
+  public makeUserMaketer(userId: any, role: any){
+    return this.http.get(this.baseUrl+`/admin/update-user-role/${userId}?role=${role}`)
   }
 }
