@@ -21,6 +21,7 @@ import { OffersComponent } from './offers/offers.component';
 import { NairaCurrencyPipe } from './naira-currency.pipe';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LoaderComponent } from './common/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     SubscriptionsComponent,
     InspectionsComponent,
     OffersComponent,
-    CurrencyFormatPipe
+    CurrencyFormatPipe,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
