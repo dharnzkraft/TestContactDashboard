@@ -16,6 +16,9 @@ export class UsersComponent {
   userSubscription: any;
   adminType: any;
   isUserBlocked!: boolean;
+  userCode: any;
+  amount: any;
+  findWallet = false;
 
   constructor(
     private userService: UsersService,
@@ -24,6 +27,7 @@ export class UsersComponent {
     this.getUsers()
     this.userService.getLoggedInUser().subscribe((response: any)=>{
       console.log(response)
+      this.userCode = response.data?.referalCode
       this.adminType = response.data?.role
       if(this.adminType === 'user' ){
         // this.router.navigateByUrl('/')
@@ -54,11 +58,10 @@ export class UsersComponent {
   }
 
   showUser(id: any){
-
     const viewedUser =  this.userList.findIndex((item: { id: any; }) => item.id === id)
     this.viewedUser = this.userList[viewedUser]
     this.userService.getUserFullDetails(id).subscribe((response: any)=>{
-      // console.log(response)
+      console.log(this.viewedUser)
       if(response.success){
         this.userFullDetails = response.data
         this.userSubscription = this.userFullDetails.subscriptions
@@ -82,6 +85,7 @@ export class UsersComponent {
     this.userService.makeUserMaketer(id, 'marketter').subscribe((response: any)=>{
       if(response.success){
         alert('Success')
+        this.getUsers()
       }
     })
   }
@@ -90,7 +94,19 @@ export class UsersComponent {
     this.userService.makeUserMaketer(id, 'admin').subscribe((response: any)=>{
       if(response.success){
         alert('Success')
+        this.getUsers()
       }
+    })
+  }
+
+  makeAccountant(id: any){
+    this.userService.makeUserMaketer(id, 'accountant').subscribe((response: any)=>{
+      if(response.success){
+        alert('Success')
+        this.getUsers()
+      }
+    },(error)=>{
+      alert(error.error.message)
     })
   }
 
@@ -99,10 +115,33 @@ export class UsersComponent {
       // console.log(response)
       if(response.success){
         alert('user unblocked successfully!')
+        this.getUsers()
       }
     })
   }
 
+  fundUserWallet(){
+    const body = {
+      amount: this.amount,
+      recipient: this.viewedUser?.referalCode,
+      description: 'Wallet to wallet transfer',
+      reference: this.generateRandomAlphabets(17), //Must be Unique
+    };
+    this.userService.transferFunds(body).subscribe((response: any)=>{
+      console.log(response)
+      alert(response.message)
+    })
+  }
+
+  generateRandomAlphabets(length: number): string {
+    const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * alphabets.length);
+      result += alphabets[randomIndex];
+    }
+    return result;
+  }
   
   
 }

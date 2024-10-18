@@ -11,10 +11,20 @@ export class SubscriptionsComponent {
   userList: any;
   remappedWithdrawal: any;
   public transferState: 'viewTransfersHistory' | 'makeTransfer' ='viewTransfersHistory' ;
+  adminType: any;
+  selectedWithdrawal: any;
+  approvedByAccountant: boolean = false;
 
   constructor(
     private userService: UsersService
   ){
+    this.userService.getLoggedInUser().subscribe((response: any)=>{
+      console.log(response)
+      this.adminType = response.data?.role
+      // if(this.adminType === 'user' ){
+      //   this.router.navigateByUrl('/')
+      // }
+    })
     this.getUsers()
    
   }
@@ -37,14 +47,52 @@ export class SubscriptionsComponent {
           return withdrawal;
         });
         this.remappedWithdrawal = updatedTransactions
+        console.log('remapped', this.remappedWithdrawal)
       }
       
     })
   }
 
   approveWithdrawal(id: any){
-    this.userService.approveWithdrawal(id).subscribe((response: any)=>{
-      // console.log(response);
+    if(this.adminType === 'accountant' ){
+      this.accountantApprove(id)
+    }else if(this.adminType === 'admin'){
+      this.adminApprove(id)
+    }else if(this.adminType === 'super_admin'){
+      this.superAdminApprove(id)
+    }
+  }
+
+  accountantApprove(id: any){
+    this.userService.accountantApprove(id).subscribe((response: any)=>{
+      if(response.success){
+        this.getUsers()
+        alert(response.message)
+      }
+    },(error)=>{
+      alert(error.error.message)
+    })
+  }
+
+  adminApprove(id: any){
+    this.userService.adminApprove(id).subscribe((response: any)=>{
+      if(response.success){
+        this.getUsers()
+        alert(response.message)
+      }
+    },(error)=>{
+      alert(error.error.message)
+    })
+  }
+
+  superAdminApprove(id: any){
+    this.userService.superAdminApprove(id).subscribe((response: any)=>{
+      if(response.success){
+        this.getUsers()
+        alert(response.message)
+      }
+    },(error)=>{
+      alert(error.error.message)
     })
   }
 
@@ -52,6 +100,18 @@ export class SubscriptionsComponent {
     this.userService.disapproveWithdrawal(id).subscribe((response: any)=>{
       // console.log(response)
     })
+  }
+
+  view(data: any){
+    this.transferState = 'makeTransfer';
+    const fullDetails = this.remappedWithdrawal.filter((item: { id: any; }) => item.id === data.id )
+    // console.log(fullDetails)
+    this.selectedWithdrawal = fullDetails;
+    console.log(this.selectedWithdrawal)
+    if(this.selectedWithdrawal[0]?.accountant){
+      this.approvedByAccountant = true;
+    }
+    
   }
 
   getUsers(){

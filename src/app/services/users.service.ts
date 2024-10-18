@@ -53,6 +53,18 @@ export class UsersService {
     return this.http.get(this.baseUrl+`/user/withdrawal/approve/${id}`)
   }
 
+  public accountantApprove(id: any){
+    return this.http.get(this.baseUrl+`/admin/request-withdrawal/accountant-approve/${id}`)
+  }
+
+  public adminApprove(id: any){
+    return this.http.get(this.baseUrl+`/admin/request-withdrawal/admin-approve/${id}`)
+  }
+
+  public superAdminApprove(id: any){
+    return this.http.get(this.baseUrl+`admin/request-withdrawal/superadmin-approve/${id}`)
+  }
+
   public disapproveWithdrawal(id: any){
     return this.http.get(this.baseUrl+`/user/withdrawal/disapprove/${id}`)
   }
@@ -71,5 +83,9 @@ export class UsersService {
   
   public makeUserMaketer(userId: any, role: any){
     return this.http.get(this.baseUrl+`/admin/update-user-role/${userId}?role=${role}`)
+  }
+
+  public transferFunds(payload: any){
+    return this.http.post(this.baseUrl+`/user/transfer-fund`, payload);
   }
 }

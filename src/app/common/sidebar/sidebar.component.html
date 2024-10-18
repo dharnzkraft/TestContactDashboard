@@ -107,7 +107,7 @@
         </svg>
       </a>
     </div>
-    <div class="font-small" *ngIf="adminType == 'super_admin' " >
+    <div class="font-small" *ngIf="adminType == 'super_admin' || 'accountant' || 'admin' " >
       <a
         routerLink="/dashboard/withdrawals"
         routerLinkActive="active"
@@ -139,7 +139,7 @@
         </svg>
       </a>
     </div>
-    <div class="font-small" >
+    <div class="font-small" *ngIf="adminType === 'super_admin' || 'admin' "  >
       <a
         routerLink="/dashboard/inspections"
         routerLinkActive="active"

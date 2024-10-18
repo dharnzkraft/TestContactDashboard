@@ -99,6 +99,9 @@
                     Account Number: <span class="text-orange-300" >{{viewedUser?.profile?.accountNumber}}</span>
                 </div>
                 <div class="my-3" >
+                  User Code : <span class="text-orange-300" >{{userCode}}</span>
+              </div>
+                <div class="my-3" >
                     Phone Number: <span class="text-orange-300"  >{{viewedUser.phoneNumber}}</span>
                 </div>
                 <div class="my-3" >
@@ -144,7 +147,7 @@
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                      <tr *ngFor="let tran of userFullDetails.transactions">
+                      <tr *ngFor="let tran of userFullDetails?.transactions">
                         <td class="px-2 py-4 whitespace-nowrap sm:px-6">
                           {{ tran?.description }}
                         </td>
@@ -236,6 +239,17 @@
               <button class="bg-red-500 px-5 mt-5 py-2 rounded shadow text-white text-xs" *ngIf="isUserBlocked" (click)="unblockUser()" >unblock User</button>
               <button class="bg-purple-900 px-5 mt-5 py-2 rounded shadow text-white text-xs mx-5" *ngIf="adminType == 'super_admin' " (click)="makeAMaketter(this.viewedUser.id)" > Make User a marketer</button>
               <button class="bg-purple-900 px-5 mt-5 py-2 rounded shadow text-white text-xs mx-5" *ngIf="adminType == 'super_admin' " (click)="makeAdmin(this.viewedUser.id)" > Make an Admin</button>
+              <button class="bg-purple-900 px-5 mt-5 py-2 rounded shadow text-white text-xs mx-5" *ngIf="adminType == 'super_admin' " (click)="makeAccountant(this.viewedUser.id)" > Make an Accountant</button>
+              <button class="bg-purple-900 px-5 mt-5 py-2 rounded shadow text-white text-xs mx-5" *ngIf="adminType == 'super_admin' " (click)="findWallet = !findWallet " > Fund User Wallet</button>
+            </div>
+
+            <div class="bg-white mt-3 p-5 rounded-md" *ngIf="findWallet" >
+              <div class="mb-4">
+                <label for="registerEmail" class="block text-sm font-medium text-gray-700">Amount</label>
+                <input type="text" id="amount" [(ngModel)]="amount"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              </div>
+              <button class="bg-purple-900 px-5 mt-5 py-2 rounded shadow text-white text-xs mx-5" *ngIf="adminType == 'super_admin' " (click)="fundUserWallet()" > Fund User Wallet</button>
             </div>
            
         </div>

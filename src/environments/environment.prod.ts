@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseUrl: 'https://zeropay.onrender.com/api/v1'
+    baseUrl: 'https://zeropay-uqja.onrender.com/api/v1'
   };

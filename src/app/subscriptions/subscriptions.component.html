@@ -2,7 +2,7 @@
   <ng-container [ngSwitch]="transferState">
     <div class="min-w-full items-center h-auto justify-center justify-between" *ngSwitchCase="'viewTransfersHistory'" >
       <div class="text-end">
-        <button
+        <!-- <button
           class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs"
           (click)="transferState = 'makeTransfer'"
         >
@@ -10,7 +10,7 @@
             
             &nbsp; Request Payouts
           </div>
-        </button>
+        </button> -->
       </div>
       <div class="lg:p-2 w-full">
         <table class="min-w-full divide-y divide-gray-200">
@@ -66,7 +66,7 @@
                 {{ withdrawal?.createdAt | date : "longDate" }}
               </td>
               <td class="px-2 py-4 whitespace-nowrap sm:px-6">
-                <a
+                <!-- <a
                   class="font-xs font-bold"
                   *ngIf="withdrawal?.status !== 'PENDING'"
                   >Completed</a
@@ -83,7 +83,8 @@
                   (click)="disapproveWithdrawal(withdrawal?.id)"
                   class="text-red-500 font-xs font-bold"
                   >Decline</a
-                >
+                > -->
+                <button class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" (click)="view(withdrawal)" >VIEW</button>
               </td>
               <!-- <td class="px-2 py-4 whitespace-nowrap sm:px-6">VIEW</td> -->
             </tr>
@@ -92,7 +93,29 @@
       </div>
     </div>
     <div class="min-w-full items-center h-auto justify-center justify-between" *ngSwitchCase="'makeTransfer'" >
-
+      <div class="text-end">
+        <button
+          class="bg-purple-900 px-5 py-2 rounded shadow text-white text-xs"
+          (click)="transferState = 'viewTransfersHistory' "
+        >
+          <div class="flex">
+            
+            &nbsp; BACK
+          </div>
+        </button>
+      </div>
+      <div class="mt-8" >
+        <p class="my-3" >Amount Requested: {{this.selectedWithdrawal[0].amount}} </p>
+        <p class="my-3" >User Name: {{this.selectedWithdrawal[0].user}} </p>
+        <p class="my-3" >Source: {{this.selectedWithdrawal[0].source}} </p>
+        <p class="my-3" >Status: {{this.selectedWithdrawal[0].status}} </p>
+        <p class="my-3" >Approved By Accountant: {{this.approvedByAccountant}} </p>
+      </div>
+      <br><br>
+      <div class="flex" >
+        <button class="bg-purple-900 text-xs text-white py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" (click)="approveWithdrawal(this.selectedWithdrawal[0]?.id)" >APPROVE</button>
+        <button class="bg-red-400 text-xs text-white py-2 px-4 rounded hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 mx-4" (click)="disapproveWithdrawal(this.selectedWithdrawal[0]?.id)" >DECLINE</button>
+      </div>
     </div>
   </ng-container>
 
