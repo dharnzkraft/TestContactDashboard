@@ -62,7 +62,7 @@ export class UsersService {
   }
 
   public superAdminApprove(id: any){
-    return this.http.get(this.baseUrl+`admin/request-withdrawal/superadmin-approve/${id}`)
+    return this.http.get(this.baseUrl+`/admin/request-withdrawal/superadmin-approve/${id}`)
   }
 
   public disapproveWithdrawal(id: any){

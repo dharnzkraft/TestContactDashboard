@@ -14,6 +14,7 @@ export class SubscriptionsComponent {
   adminType: any;
   selectedWithdrawal: any;
   approvedByAccountant: boolean = false;
+  approvedByAdmin: boolean = false;
 
   constructor(
     private userService: UsersService
@@ -110,6 +111,10 @@ export class SubscriptionsComponent {
     console.log(this.selectedWithdrawal)
     if(this.selectedWithdrawal[0]?.accountant){
       this.approvedByAccountant = true;
+    }
+
+    if(this.selectedWithdrawal[0]?.admin){
+      this.approvedByAdmin = true;
     }
     
   }
