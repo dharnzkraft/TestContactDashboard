@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import platform from 'platform';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +9,27 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class AppComponent {
   title = 'testDashboard';
   deviceInfo: any;
-  // smart sync
-  constructor(private deviceService: DeviceDetectorService){
-    this.epicFunction()
+  isMobile: boolean = false;
+  isTablet: boolean = false;
+  isDesktopDevice: boolean = false;
+
+  constructor() {
+    this.epicFunction();
   }
 
   epicFunction() {
-    // console.log('hello `Home` component');
-    this.deviceInfo = this.deviceService.getDeviceInfo();
-    const isMobile = this.deviceService.isMobile();
-    const isTablet = this.deviceService.isTablet();
-    const isDesktopDevice = this.deviceService.isDesktop();
-    // const getDeviceId = this.deviceService
+    this.deviceInfo = platform;
+
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    this.isMobile = /iphone|android.*mobile|windows phone/i.test(userAgent);
+    this.isTablet = /ipad|android(?!.*mobile)/i.test(userAgent);
+    this.isDesktopDevice = !this.isMobile && !this.isTablet;
+
     console.log(this.deviceInfo);
-    console.log(isMobile);  // returns if the device is a mobile device (android / iPhone / windows-phone etc)
-    console.log(isTablet);  // returns if the device us a tablet (iPad etc)
-    console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
+    console.log('isMobile:', this.isMobile);
+    console.log('isTablet:', this.isTablet);
+    console.log('isDesktopDevice:', this.isDesktopDevice);
   }
 
 }
