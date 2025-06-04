@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import platform from 'platform';
+// import platform from 'platform';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent {
   }
 
   epicFunction() {
-    this.deviceInfo = platform;
+    // this.deviceInfo = platform;
 
     const userAgent = navigator.userAgent.toLowerCase();
 
