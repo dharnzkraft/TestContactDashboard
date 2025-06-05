@@ -26,10 +26,10 @@ export class AppComponent {
     this.isTablet = /ipad|android(?!.*mobile)/i.test(userAgent);
     this.isDesktopDevice = !this.isMobile && !this.isTablet;
 
-    console.log(this.deviceInfo);
-    console.log('isMobile:', this.isMobile);
-    console.log('isTablet:', this.isTablet);
-    console.log('isDesktopDevice:', this.isDesktopDevice);
+    //console.log(this.deviceInfo);
+    //console.log('isMobile:', this.isMobile);
+    //console.log('isTablet:', this.isTablet);
+    //console.log('isDesktopDevice:', this.isDesktopDevice);
   }
 
 }

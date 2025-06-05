@@ -12,7 +12,7 @@ export class LayoutComponent {
 
   constructor(private userService: UsersService, private router: Router){
     this.userService.getLoggedInUser().subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       this.username = response.data?.fullName
       
     })

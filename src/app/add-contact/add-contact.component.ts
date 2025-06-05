@@ -71,7 +71,7 @@ export class AddContactComponent implements OnInit{
     setTimeout(()=>{
       if (this.contactForm.valid) {
         const formData = { ...this.contactForm.value, addresses: this.addresses, longitude: this.longitude, latitude: this.latitude };
-        console.log('Form Values:', formData);
+        //console.log('Form Values:', formData);
         this.storeInLocalStorage(formData)
         this.contactForm.reset()
         this.getGeo()

@@ -28,14 +28,14 @@ export class OffersComponent {
 
   getOffers(){
     this.productService.getOffers().subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       this.offers = response.data
     })
   }
 
   deleteOffer(id: any){
     this.productService.deleteOffer(id).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
     })
   }
 
@@ -46,7 +46,7 @@ export class OffersComponent {
     if(file) {
       this.selectedFiles[fieldName] = file;
     }
-    // console.log(this.selectedFiles);
+    // //console.log(this.selectedFiles);
     this.uploadImage()
 }
 
@@ -62,7 +62,7 @@ uploadImage(){
   formData.append('image', this.formData.image);
   this.productService.convertImage(formData).subscribe((response: any)=>{
       this.isLoading = false;
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
           // this.isEnabled = false;
           this.productImage = response?.data?.image
@@ -80,7 +80,7 @@ onSubmit(){
     }
     
     this.productService.createOffers(body).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       if(response.success){
         alert('Your offer has been created and published.');
         this.getOffers()

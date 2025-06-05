@@ -20,7 +20,7 @@ export class SubscriptionsComponent {
     private userService: UsersService
   ){
     this.userService.getLoggedInUser().subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       this.adminType = response.data?.role
       // if(this.adminType === 'user' ){
       //   this.router.navigateByUrl('/')
@@ -48,7 +48,7 @@ export class SubscriptionsComponent {
           return withdrawal;
         });
         this.remappedWithdrawal = updatedTransactions
-        console.log('remapped', this.remappedWithdrawal)
+        //console.log('remapped', this.remappedWithdrawal)
       }
       
     })
@@ -99,16 +99,16 @@ export class SubscriptionsComponent {
 
   disapproveWithdrawal(id: any){
     this.userService.disapproveWithdrawal(id).subscribe((response: any)=>{
-      // console.log(response)
+      // //console.log(response)
     })
   }
 
   view(data: any){
     this.transferState = 'makeTransfer';
     const fullDetails = this.remappedWithdrawal.filter((item: { id: any; }) => item.id === data.id )
-    // console.log(fullDetails)
+    // //console.log(fullDetails)
     this.selectedWithdrawal = fullDetails;
-    console.log(this.selectedWithdrawal)
+    //console.log(this.selectedWithdrawal)
     if(this.selectedWithdrawal[0]?.accountant){
       this.approvedByAccountant = true;
     }
@@ -121,7 +121,7 @@ export class SubscriptionsComponent {
 
   getUsers(){
     this.userService.getUsers().subscribe((response: any)=>{
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
         this.userList = response.data
         this.getWithdrawals()

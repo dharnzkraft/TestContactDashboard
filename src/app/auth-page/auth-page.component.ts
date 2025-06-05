@@ -45,7 +45,7 @@ export class AuthPageComponent {
   onSubmitLogin() {
     this.isLoading = true;
     if (this.loginForm.valid) {
-      console.log('Login:', this.loginForm.value);
+      //console.log('Login:', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe((response: any)=>{
         this.isLoading = false;
         if( response.data?.user_data.role !== 'user' ){
@@ -57,7 +57,7 @@ export class AuthPageComponent {
           
         }
         // alert('You do not have admin access')
-        console.log(response)
+        //console.log(response)
       },(error)=>{
         this.isLoading = false;
         alert(error.error.message)
@@ -67,12 +67,12 @@ export class AuthPageComponent {
 
   onSubmitRegister() {
     this.isLoading = true;
-    console.log(this.registerForm.value)
+    //console.log(this.registerForm.value)
     if (this.registerForm.valid) {
       this.isLoading = false;
-      console.log('Register:', this.registerForm.value);
+      //console.log('Register:', this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe((res: any)=>{
-        console.log(res)
+        //console.log(res)
         if(res.success){
           alert('Registration completed. Proceed to login')
           this.isLogin = !this.isLogin

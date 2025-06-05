@@ -26,7 +26,7 @@ export class UsersComponent {
   ){
     this.getUsers()
     this.userService.getLoggedInUser().subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       this.userCode = response.data?.referalCode
       this.adminType = response.data?.role
       if(this.adminType === 'user' ){
@@ -38,10 +38,10 @@ export class UsersComponent {
   
 
   onSearch(): void {
-    console.log('Searching for:', this.searchQuery);
+    //console.log('Searching for:', this.searchQuery);
     // Implement search logic here
     this.userService.searchQuery('','',this.searchQuery,5000000,1).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       if(response.success){
         this.userList = response.data
       }
@@ -50,7 +50,7 @@ export class UsersComponent {
 
   getUsers(){
     this.userService.searchQuery('','','',5000000,1).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       if(response.success){
         this.userList = response.data
       }
@@ -61,20 +61,20 @@ export class UsersComponent {
     const viewedUser =  this.userList.findIndex((item: { id: any; }) => item.id === id)
     this.viewedUser = this.userList[viewedUser]
     this.userService.getUserFullDetails(id).subscribe((response: any)=>{
-      console.log(this.viewedUser)
+      //console.log(this.viewedUser)
       if(response.success){
         this.userFullDetails = response.data
         this.userSubscription = this.userFullDetails.subscriptions
         this.isUserBlocked = response.data?.isBlocked
       }
     })
-    // console.log(this.viewedUser)
+    // //console.log(this.viewedUser)
     this.userState = 'viewUserDetails'
   }
   
   blockUser(){
     this.userService.blockUser(this.viewedUser.id).subscribe((response: any)=>{
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
         alert('user blocked successfully!')
       }
@@ -112,7 +112,7 @@ export class UsersComponent {
 
   unblockUser(){
     this.userService.unblockUser(this.viewedUser.id).subscribe((response: any)=>{
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
         alert('user unblocked successfully!')
         this.getUsers()
@@ -128,7 +128,7 @@ export class UsersComponent {
       reference: this.generateRandomAlphabets(17), //Must be Unique
     };
     this.userService.transferFunds(body).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       alert(response.message)
     })
   }

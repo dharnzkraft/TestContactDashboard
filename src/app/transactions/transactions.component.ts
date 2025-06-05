@@ -20,8 +20,9 @@ export class TransactionsComponent {
 
   getAllTransactions(){
     this.productService.getAllTransactions().subscribe((response: any)=>{
-      // console.log(response)
-      this.transactions = response.data
+      const sortedData = response.data.sort((a: { createdAt: string | number | Date; }, b: { createdAt: string | number | Date; }) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+      this.transactions = sortedData
     })
   }
 
@@ -33,7 +34,7 @@ export class TransactionsComponent {
 
   getPaginated(){
     this.productService.getPaginatedTransaction('transaction',20,1).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
     })
   }
 }

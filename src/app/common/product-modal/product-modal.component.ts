@@ -26,13 +26,13 @@ export class ProductModalComponent implements OnChanges {
 
   getDetails(){
     this.productService.getAProduct(this.productId).subscribe((response: any) => {
-      console.log(response)
+      //console.log(response)
       this.productDetails = response.data
     })
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.productId)
+    //console.log(this.productId)
     if(this.productId){
       this.getDetails()
     }

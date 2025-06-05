@@ -29,8 +29,10 @@ export class DashboardComponent {
 
   getAllTransactions(){
     this.productService.getAllTransactions().subscribe((response: any)=>{
-      console.log(response)
-      this.transactions = response.data
+      // //console.log(response)
+      const sortedData = response.data.sort((a: { createdAt: string | number | Date; }, b: { createdAt: string | number | Date; }) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+      this.transactions = sortedData
     })
   }
 
@@ -38,19 +40,19 @@ export class DashboardComponent {
     const storageKey = 'contactInformations';
     const currentData = localStorage.getItem(storageKey);
     this.storedData = currentData ? JSON.parse(currentData) : [];
-    // console.log('Fetched Data:', this.storedData);
+    // //console.log('Fetched Data:', this.storedData);
   }
 
   getProducts(){
     this.productService.getAllProducts().subscribe((response: any)=>{
-      console.log(response)
+      // //console.log(response)
       this.productList = response.data
     })
   }
 
   getUsers(){
     // this.userService.getUsers().subscribe((response: any)=>{
-    //   console.log(response)
+    //   //console.log(response)
     //   if(response.success){
     //     this.userList = response.data
         
@@ -69,7 +71,7 @@ export class DashboardComponent {
 
   getNewUsers(){
     this.userService.searchQuery(this.getFormattedDate(400), '', '', 2000000, 1).subscribe((response: any)=>{
-      console.log(response)
+      // //console.log(response)
       this.userCount = response.data?.length
       this.userList = response.data
     })

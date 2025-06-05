@@ -39,7 +39,7 @@ export class InspectionsComponent {
 
   getInspections(){
     this.userService.getAllInspections().subscribe((response: any)=>{
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
         this.allInspections = response.data
       }
@@ -48,7 +48,7 @@ export class InspectionsComponent {
 
   deleteInspection(id: any){
     this.userService.deleteInspection(id).subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       if(response.success){
         this.getInspections()
       }
@@ -68,7 +68,7 @@ export class InspectionsComponent {
 
   viewInsp(id: any){
     this.userService.getOneInspection(id).subscribe((response: any)=>{
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
         this.viewedInsp = response.data
         this.InspState = "viewMore"

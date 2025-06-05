@@ -42,7 +42,7 @@ export class ProductComponent {
 
   getProducts(){
     this.productService.getAllProducts().subscribe((response: any)=>{
-      console.log(response)
+      //console.log(response)
       this.productList = response.data
 
     })
@@ -51,7 +51,7 @@ export class ProductComponent {
 
   openModal(id: any) {
     this.selectedProductId = id
-    console.log(this.selectedProductId)
+    //console.log(this.selectedProductId)
     this.isModalOpen = true;
   }
 
@@ -66,7 +66,7 @@ export class ProductComponent {
     if(file) {
       this.selectedFiles[fieldName] = file;
     }
-    // console.log(this.selectedFiles);
+    // //console.log(this.selectedFiles);
     this.uploadImage()
 }
 
@@ -77,7 +77,7 @@ onFileSelected2(event: any, fieldName: string) {
   if(file) {
     this.selectedFiles[fieldName] = file;
   }
-  // console.log(this.selectedFiles);
+  // //console.log(this.selectedFiles);
   this.uploadImage2()
 }
 
@@ -88,7 +88,7 @@ onFileSelected3(event: any, fieldName: string) {
   if(file) {
     this.selectedFiles[fieldName] = file;
   }
-  // console.log(this.selectedFiles);
+  // //console.log(this.selectedFiles);
   this.uploadImage3()
 }
 
@@ -104,7 +104,7 @@ uploadImage(){
   formData.append('image', this.formData.image);
   this.productService.convertImage(formData).subscribe((response: any)=>{
       this.isLoading = false;
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
           this.isEnabled = false;
           this.productImage = response?.data?.image
@@ -127,7 +127,7 @@ uploadImage2(){
   formData.append('image2', this.formData.image);
   this.productService.convertImage(formData).subscribe((response: any)=>{
       this.isLoading = false;
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
           this.isEnabled = false;
           this.productImage2 = response?.data?.image
@@ -150,7 +150,7 @@ uploadImage3(){
   formData.append('image3', this.formData.image);
   this.productService.convertImage(formData).subscribe((response: any)=>{
       this.isLoading = false;
-      // console.log(response)
+      // //console.log(response)
       if(response.success){
           this.isEnabled = false;
           this.productImage3 = response?.data?.image
@@ -163,7 +163,7 @@ uploadImage3(){
 
 deleteProduct(id: any){
   this.productService.deleteProduct(id).subscribe((response: any)=>{
-    console.log(response)
+    //console.log(response)
     if(response.success){
       this.getProducts()
     }
@@ -173,12 +173,12 @@ deleteProduct(id: any){
 onSubmit(){
     // this.loader.show()
     this.isLoading = true;
-    // console.log('fired')
+    // //console.log('fired')
     this.productForm.value.veiw = [this.productImage, this.productImage2, this.productImage3]
     this.productService.createProduct(this.productForm.value).subscribe((response: any)=>{
         // this.loader.hide()
         this.isLoading = false;
-        // console.log(response)
+        // //console.log(response)
         if(response.success){
           // this.notifier.success('Success', 'Product Added Successfully');
           // this.closeDialogue();
