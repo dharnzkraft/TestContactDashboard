@@ -36,6 +36,8 @@ export class DashboardComponent {
     })
   }
 
+  
+
   fetchFromLocalStorage(): void {
     const storageKey = 'contactInformations';
     const currentData = localStorage.getItem(storageKey);

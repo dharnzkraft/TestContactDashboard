@@ -32,6 +32,16 @@
                       <th
                         class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
                       >
+                        Type
+                      </th>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
+                        Date
+                      </th>
+                      <th
+                        class="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider sm:px-6"
+                      >
                         Status
                       </th>
                       <th
@@ -51,6 +61,12 @@
                       </td>
                       <td class="px-2 py-4 whitespace-nowrap sm:px-6">
                         {{ tran?.amount | nairaCurrency }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ tran?.type }}
+                      </td>
+                      <td class="px-2 py-4 whitespace-nowrap sm:px-6">
+                        {{ tran?.updatedAt | date: 'medium' }}
                       </td>
                       <td class="px-2 py-4 whitespace-nowrap sm:px-6">
                         {{ tran?.status }}
